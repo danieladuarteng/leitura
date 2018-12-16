@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import logo from './logo.svg';
+import api from './LeituraAPI'
 import './App.css';
 
 class Home extends Component {
   render() {
+    console.log('api', api)
     return (
       <div>
         <div className="home">
