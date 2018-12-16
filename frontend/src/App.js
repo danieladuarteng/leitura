@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Home from './Home';
 import ViewPost from './ViewPost';
+import UpdatePost from './UpdatePost';
 import { Route } from  'react-router-dom';
 
 class App extends Component {
@@ -15,6 +16,11 @@ class App extends Component {
 
       <Route path="/post" render={() =>(
         <ViewPost />
+      )}/>
+
+
+      <Route path="/update" render={() =>(
+        <UpdatePost />
       )}/>
       </div>
     );

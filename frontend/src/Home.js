@@ -16,15 +16,15 @@ class Home extends Component {
 
             <div className="post1">
               <Link to="/post"><h1>Como foi minha primeira vez em um Hackathon</h1></Link>
-                
-              
+
+
 
               <div className="cabecalho">
                 <div className="box-1"><a href="blog/ti-para-todos/">TI PARA TODOS</a></div>
                 <div className="box-2"><a href="sobre-mim">Daniela Duarte</a></div>
                 <div className="box-3">20 de junho de 2018</div>
                 <div className="box-4"></div>
-                Contador
+                <div className="contador">32 comments</div>
               </div>
 
               <div className="conteudo-post">
@@ -44,13 +44,17 @@ class Home extends Component {
 
               <a href="blog/ti-para-todos/como-foi-minha-primeira-vez-em-um-hackathon">
                 <div className="botaoEnviar">CONTINUE LENDO</div>
-                <div className="icons">
-                  <div className="like-button"></div>
-                  Contador
-                  <div className="deslike-button"></div>
-                  Contador
+                <div className="icons-post">
+                  <div className="like-post"></div>
+                  <div className="like-post-text">52</div>
+                  <div className="deslike-post"></div>
                 </div>
               </a>
+
+              <div className="edit-or-remove">
+                <Link to="/update"><div id="edit-post">EDIT</div></Link>
+                <div id="remove-post">REMOVE</div>
+              </div>
             </div>
           </div>
 
@@ -58,7 +62,8 @@ class Home extends Component {
           <div className="grid-posts-item2">
 
             <div className="meconheca">
-              <div className="botaoEnviar"><a href="sobre-mim">NEW POST</a></div>
+            <Link to="/update"><div className="botaoEnviar">NEW POST</div></Link>
+              
             </div>
 
             <div className="categories">
