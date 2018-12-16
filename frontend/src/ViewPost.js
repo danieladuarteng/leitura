@@ -10,13 +10,13 @@ class ViewPost extends Component {
                     <h1><strong>Leitura</strong></h1>
                 </div>
 
-                <div class="estrutura-blog">
-                    <div class="conteudo-blog">
+                <div className="container-view">
+                    <div className="item-main">
                         <h1>Tecnologia é só coisa de homem?</h1>
-                        <div class="cabecalho">
-                            <div class="box-1"><a href="../mulheres-ti/">MULHERES TI</a></div>
-                            <div class="box-2"><a href="../../sobre-mim">Daniela Duarte</a></div>
-                            <div class="box-3">07 de dezembro de 2017</div>
+                        <div className="cabecalho">
+                            <div className="box-1"><a href="../mulheres-ti/">MULHERES TI</a></div>
+                            <div className="box-2"><a href="../../sobre-mim">Daniela Duarte</a></div>
+                            <div className="box-3">07 de dezembro de 2017</div>
                             <div className="icons">
                                 <div className="like-button"></div>
                                 Contador
@@ -30,6 +30,10 @@ class ViewPost extends Component {
                         mas afinal essa área só contrata homem? Claro que não.
 			            A área de tecnologia é como as outras, feita de homens e mulheres.
                         </p>
+                    </div>
+                    <div className="item-sidebar">
+                        <div id="edit-post">EDIT</div>
+                        <div id="remove-post">REMOVE</div>
                     </div>
                 </div>
             </div>

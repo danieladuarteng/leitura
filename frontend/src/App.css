@@ -1659,33 +1659,22 @@
 	{
 		padding-top:80px;
 	}
-	.estrutura-blog
+	.container-view
 	{
 		padding-bottom: auto;
 		text-align: left;
+		display: grid;
+		grid-template-columns: auto 209px;
+		grid-template-rows: auto;
+		grid-template-areas: 
+			"main sidebar";
+		justify-items: stretch;
+		align-items: stretch;
+		justify-content: stretch;
+		align-content: stretch;
 	}
 
-	/*smartphone*/
-	@media only screen and (max-width: 480px)
-	{
-		.estrutura-blog
-		{
-			text-align: left;
-			margin: 23px 20px;
-			padding-bottom: auto;
-		}
-	}
 
-	/*tablet*/
-	@media only screen and (min-width: 481px) and (max-width: 768px)
-	{
-		.estrutura-blog
-		{
-			text-align: left;
-			margin: 23px 20px;
-			padding-bottom: auto;
-		}
-	}
 
 	.falecomigo-conteudo
 	{
@@ -1710,25 +1699,39 @@
 
 	.falecomigo-conteudo ul,ol{margin-left: 20px;}
 	
-	
-	.conteudo-blog
+	.item-sidebar{
+		grid-area: sidebar;
+		align-self: stretch;
+		margin: 99px auto auto 34px;
+	}
+
+	#edit-post, #remove-post{
+		border: 1px solid #ff0080;
+		padding: 20px;
+		text-align: center;
+		color: #ff0080;
+		font-weight: bold;
+	}
+	.item-main
 	{
 		margin: 40px auto;/*top e botton=0 right e left=auto*/
 		max-width: 940px;
 		padding: 0 40px;/*top e botton=0 right e left=10px*/
+		grid-area: main;
+		align-self: stretch;
 	}
 
 	/*smartphone*/
 	@media only screen and (max-width: 480px)
 	{
-		.conteudo-blog{padding: 0 20px;}
+		.item-main{padding: 0 20px;}
 	}
 
-	.conteudo-blog p{margin-bottom:20px;}
+	.item-main p{margin-bottom:20px;}
 
-	.conteudo-blog ul,ol{margin-left: 20px;}
+	.item-main ul,ol{margin-left: 20px;}
 
-	.grid-conteudo-blog
+	.grid-item-main
 	{
 		margin: 0px auto;
 		max-width: 996px;
@@ -1738,7 +1741,7 @@
 	/*tablet*/
 	@media only screen and (min-width: 481px) and (max-width: 768px)
 	{
-		.grid-conteudo-blog
+		.grid-item-main
 		{
 			margin: -23px auto;
 		}
@@ -1747,16 +1750,16 @@
 	/*smartphone*/
 	@media only screen and (max-width: 480px)
 	{
-		.grid-conteudo-blog
+		.grid-item-main
 		{
 			padding: 100px 20px;
 			margin: -23px auto;
 		}
 	}
 
-	.grid-conteudo-blog p{margin-bottom:20px;}
+	.grid-item-main p{margin-bottom:20px;}
 
-	.grid-conteudo-blog ul,ol{margin-left: 20px;}
+	.grid-item-main ul,ol{margin-left: 20px;}
 
 	.foto-blog img
 	{
