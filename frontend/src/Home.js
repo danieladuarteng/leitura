@@ -1,71 +1,61 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import logo from './logo.svg';
+import PropTypes from 'prop-types'
 import api from './LeituraAPI'
 import './App.css';
 
 class Home extends Component {
   render() {
-    console.log('api', api)
+    const { posts } = this.props;
+    console.log(posts)
     return (
+
       <div>
         <div className="home">
           <h1><strong>Leitura</strong></h1>
         </div>
 
         <div className="grid-posts">
-          <div className="grid-posts-item1">
+          {posts.map(post => (
+            <div className="grid-posts-item1" key={post.id}>
 
-            <div className="post1">
-              <Link to="/post"><h1>Como foi minha primeira vez em um Hackathon</h1></Link>
-
-
-
-              <div className="cabecalho">
-                <div className="box-1"><a href="blog/ti-para-todos/">TI PARA TODOS</a></div>
-                <div className="box-2"><a href="sobre-mim">Daniela Duarte</a></div>
-                <div className="box-3">20 de junho de 2018</div>
-                <div className="box-4"></div>
-                <div className="contador">32 comments</div>
-              </div>
-
-              <div className="conteudo-post">
-                <p>Primeiro para quem não sabe:</p>
-
-                <p>
-                  <strong>
-                    <em>
-                      <a href="http://www.natura.com.br/e/entenda-o-que-e-hackathon" target="_blank">
-                        Hackathon é um evento que reúne pessoas empreendedoras, apaixonadas por tecnologia e
-                        sustentabilidade para uma maratona de programação, prototipagem e colaboração.
-                      </a>
-                    </em>
-                  </strong>
-                </p>
-              </div>
-
-              <a href="blog/ti-para-todos/como-foi-minha-primeira-vez-em-um-hackathon">
-                <div className="botaoEnviar">CONTINUE LENDO</div>
-                <div className="icons-post">
-                  <div className="like-post"></div>
-                  <div className="like-post-text">52</div>
-                  <div className="deslike-post"></div>
+              <div className="post1" >
+                <Link to="/post"><h1>{post.title}</h1></Link>
+                <div className="cabecalho">
+                  <div className="box-1"><a href="blog/ti-para-todos/">{post.category}</a></div>
+                  <div className="box-2"><a href="sobre-mim">{post.author}</a></div>
+                  <div className="box-3">{post.timestamp}</div>
+                  <div className="box-4"></div>
+                  <div className="contador">{post.commentCount} comments</div>
                 </div>
-              </a>
 
-              <div className="edit-or-remove">
-                <Link to="/update"><div id="edit-post">EDIT</div></Link>
-                <div id="remove-post">REMOVE</div>
+                <div className="conteudo-post">
+                  <p>{post.body}</p>
+                </div>
+
+                <a href="blog/ti-para-todos/como-foi-minha-primeira-vez-em-um-hackathon">
+                  <div className="botaoEnviar">CONTINUE LENDO</div>
+                  <div className="icons-post">
+                    <div className="like-post"></div>
+                    <div className="like-post-text">{post.voteScore}</div>
+                    <div className="deslike-post"></div>
+                  </div>
+                </a>
+
+                <div className="edit-or-remove">
+                  <Link to="/update"><div id="edit-post">EDIT</div></Link>
+                  <div id="remove-post">REMOVE</div>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
 
 
           <div className="grid-posts-item2">
 
             <div className="meconheca">
-            <Link to="/update"><div className="botaoEnviar">NEW POST</div></Link>
-              
+              <Link to="/update"><div className="botaoEnviar">NEW POST</div></Link>
+
             </div>
 
             <div className="categories">
@@ -107,5 +97,9 @@ class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  posts: PropTypes.array.isRequired,
+};
 
 export default Home;
