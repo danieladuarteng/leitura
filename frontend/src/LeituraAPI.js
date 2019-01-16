@@ -18,6 +18,18 @@ export const getAllPosts = () =>
         return error
     })
 
+export const getAllCategories = () =>
+  fetch(`${api}/categories`, { headers })
+    .then(res => res.json())
+    .then(data => {
+        console.log('todas categorias')
+        console.log(data)
+        return data
+    })
+    .catch(error =>{
+        console.log(error)
+        return error
+    })
 
 
 export default api;

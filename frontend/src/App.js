@@ -10,20 +10,24 @@ import * as LeituraAPI from './LeituraAPI'
 class App extends Component {
   state = {//colocamos no state para que o React gerencie as atualizações 
     posts: [],
+    categories: {},
   }
 
 async componentDidMount() {//deixa de forma assincrona
     const posts = await LeituraAPI.getAllPosts()//fala para esperar até pegar todos os dados
-    this.setState({posts})
+    const categories = await LeituraAPI.getAllCategories()
+
+    this.setState({posts, categories})
   }
   
   render() {
-    console.log('posts', this.state.posts) 
+    console.log('posts', this.state.categories) 
     return (
       <div>
       <Route exact path="/" render={() =>(
         <Home 
           posts={this.state.posts}
+          categories={this.state.categories}
         />
       )}/>
 

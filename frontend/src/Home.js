@@ -6,8 +6,8 @@ import './App.css';
 
 class Home extends Component {
   render() {
-    const { posts } = this.props;
-    console.log(posts)
+    const { posts, categories } = this.props;
+
     return (
 
       <div>
@@ -16,10 +16,9 @@ class Home extends Component {
         </div>
 
         <div className="grid-posts">
-          {posts.map(post => (
-            <div className="grid-posts-item1" key={post.id}>
-
-              <div className="post1" >
+          <div className="grid-posts-item1">
+            {posts.map(post => (
+              <div className="post1" key={post.id}>
                 <Link to="/post"><h1>{post.title}</h1></Link>
                 <div className="cabecalho">
                   <div className="box-1"><a href="blog/ti-para-todos/">{post.category}</a></div>
@@ -47,15 +46,12 @@ class Home extends Component {
                   <div id="remove-post">REMOVE</div>
                 </div>
               </div>
-            </div>
-          ))}
-
+            ))}
+          </div>
 
           <div className="grid-posts-item2">
-
             <div className="meconheca">
               <Link to="/update"><div className="botaoEnviar">NEW POST</div></Link>
-
             </div>
 
             <div className="categories">
@@ -72,23 +68,19 @@ class Home extends Component {
 
             <div className="atualizacoes">
               <h1>CATEGORIES</h1>
-              <ul>
+             
+
+                <ul>
+                
                 <li>
-                  <a href="blog/ti-para-todos/como-foi-o-meetup-front-end-study-1">
-                    ALL CATEGORIES
-						</a>
+               
+                    {console.log('dani',Object.keys(categories).map(item => item))}
+						   
                 </li>
-                <li>
-                  <a href="blog/ti-para-todos/como-foi-minha-primeira-vez-em-um-hackathon">
-                    MULHERES NO TI
-						</a>
-                </li>
-                <li>
-                  <a href="blog/aprendizados/relacionamento-no-mundo-real-tambem-e-essencial">
-                    TECNOLOGIA
-						</a>
-                </li>
+              
               </ul>
+              
+            
             </div>
 
           </div>
@@ -100,6 +92,7 @@ class Home extends Component {
 
 Home.propTypes = {
   posts: PropTypes.array.isRequired,
+  categories: PropTypes.object.isRequired,
 };
 
 export default Home;
