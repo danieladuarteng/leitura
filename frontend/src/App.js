@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Home from './Home';
 import ViewPost from './ViewPost';
 import UpdatePost from './UpdatePost';
-import { Route } from  'react-router-dom';
+import { Route } from 'react-router-dom';
 import * as LeituraAPI from './LeituraAPI'
 
 class App extends Component {
@@ -13,32 +12,31 @@ class App extends Component {
     categories: {},
   }
 
-async componentDidMount() {//deixa de forma assincrona
+  async componentDidMount() {//deixa de forma assincrona
     const posts = await LeituraAPI.getAllPosts()//fala para esperar até pegar todos os dados
     const categories = await LeituraAPI.getAllCategories()
-
-    this.setState({posts, categories})
+   
+    this.setState({ posts, categories})
   }
-  
+
   render() {
-    console.log('posts', this.state.categories) 
     return (
       <div>
-      <Route exact path="/" render={() =>(
-        <Home 
-          posts={this.state.posts}
-          categories={this.state.categories}
-        />
-      )}/>
+        <Route exact path="/" render={() => (
+          <Home
+            posts={this.state.posts}
+            categories={this.state.categories}
+          />
+        )} />
 
-      <Route path="/post" render={() =>(
-        <ViewPost />
-      )}/>
+        <Route path="/post" render={() => (
+          <ViewPost />
+        )} />
 
 
-      <Route path="/update" render={() =>(
-        <UpdatePost />
-      )}/>
+        <Route path="/update" render={() => (
+          <UpdatePost />
+        )} />
       </div>
     );
   }

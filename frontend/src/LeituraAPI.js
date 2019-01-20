@@ -9,8 +9,8 @@ export const getAllPosts = () =>
   fetch(`${api}/posts`, { headers })
     .then(res => res.json())
     .then(data => {
-        console.log('todos os posts')
-        console.log(data)
+        //console.log('todos os posts')
+        //console.log(data)
     return data
     })
     .catch(error =>{
@@ -22,11 +22,25 @@ export const getAllCategories = () =>
   fetch(`${api}/categories`, { headers })
     .then(res => res.json())
     .then(data => {
-        console.log('todas categorias')
-        console.log(data)
+        //console.log('todas categorias')
+        //console.log(data)
         return data
     })
     .catch(error =>{
+        console.log(error)
+        return error
+    })
+
+
+export const getPostsForCategories = (name) =>
+    fetch(`${api}/${name}/posts`, { headers })
+      .then(res => res.json())
+      .then(data => {
+        //console.log('posts com categorias',name)
+        //console.log(data)
+        return data
+      })
+      .catch(error =>{
         console.log(error)
         return error
     })

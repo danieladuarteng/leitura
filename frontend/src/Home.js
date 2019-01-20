@@ -1,15 +1,51 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
-import api from './LeituraAPI'
+import * as LeituraAPI from './LeituraAPI'
+import Button from '@material-ui/core/Button';
+import Post from './Post';
 import './App.css';
 
+const categoriesList = [
+  {
+    id: 0,
+    title: 'All Categories',
+    category: 'all',
+  },
+  {
+    id: 1,
+    title: 'React',
+    category: 'react',
+  },
+  {
+    id: 2,
+    title: 'Redux',
+    category: 'redux',
+  },
+  {
+    id: 3,
+    title: 'Udacity',
+    category: 'udacity',
+  },
+];
+
 class Home extends Component {
+  state = {
+    categorySelected: 'all',
+  }
+
+  onClick = async (categorySelected) => {
+    if (categorySelected !== 'all') {
+      const ab = await LeituraAPI.getPostsForCategories(categorySelected)
+    }
+    this.setState({ categorySelected })
+  }
+
   render() {
-    const { posts, categories } = this.props;
+    const { posts } = this.props;
+    const { categorySelected } = this.state;
 
     return (
-
       <div>
         <div className="home">
           <h1><strong>Leitura</strong></h1>
@@ -17,36 +53,36 @@ class Home extends Component {
 
         <div className="grid-posts">
           <div className="grid-posts-item1">
-            {posts.map(post => (
-              <div className="post1" key={post.id}>
-                <Link to="/post"><h1>{post.title}</h1></Link>
-                <div className="cabecalho">
-                  <div className="box-1"><a href="blog/ti-para-todos/">{post.category}</a></div>
-                  <div className="box-2"><a href="sobre-mim">{post.author}</a></div>
-                  <div className="box-3">{post.timestamp}</div>
-                  <div className="box-4"></div>
-                  <div className="contador">{post.commentCount} comments</div>
-                </div>
-
-                <div className="conteudo-post">
-                  <p>{post.body}</p>
-                </div>
-
-                <a href="blog/ti-para-todos/como-foi-minha-primeira-vez-em-um-hackathon">
-                  <div className="botaoEnviar">CONTINUE LENDO</div>
-                  <div className="icons-post">
-                    <div className="like-post"></div>
-                    <div className="like-post-text">{post.voteScore}</div>
-                    <div className="deslike-post"></div>
-                  </div>
-                </a>
-
-                <div className="edit-or-remove">
-                  <Link to="/update"><div id="edit-post">EDIT</div></Link>
-                  <div id="remove-post">REMOVE</div>
-                </div>
-              </div>
-            ))}
+            {
+              categorySelected === 'all' ?
+                posts.map(post => (
+                  <Post
+                    key={post.id}
+                    id={post.id}
+                    title={post.title}
+                    category={post.category}
+                    author={post.author}
+                    timestamp={post.timestamp}
+                    commentCount={post.commentCount}
+                    body={post.body}
+                    voteScore={post.voteScore}
+                  />
+                ))
+                :
+                posts.filter(a => a.category === categorySelected).map(post => (
+                  <Post
+                    key={post.id}
+                    id={post.id}
+                    title={post.title}
+                    category={post.category}
+                    author={post.author}
+                    timestamp={post.timestamp}
+                    commentCount={post.commentCount}
+                    body={post.body}
+                    voteScore={post.voteScore}
+                  />
+                ))
+            }
           </div>
 
           <div className="grid-posts-item2">
@@ -68,21 +104,18 @@ class Home extends Component {
 
             <div className="atualizacoes">
               <h1>CATEGORIES</h1>
-             
-
-                <ul>
-                
-                <li>
-               
-                    {console.log('dani',Object.keys(categories).map(item => item))}
-						   
-                </li>
-              
+              <ul>
+                {categoriesList.map(item => (
+                  <li key={item.id}>
+                    <Button
+                      onClick={() => { this.onClick(item.category); }}
+                    >
+                      {item.title}
+                    </Button>
+                  </li>
+                ))}
               </ul>
-              
-            
             </div>
-
           </div>
         </div>
       </div>
