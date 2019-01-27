@@ -51,9 +51,14 @@ class Home extends Component {
     })
   }
 
+  onViewDetails = async (e, post) =>{
+    await LeituraAPI.getPostDetails(post)
+  }
+
   render() {
     const { posts } = this.props;
     const { categorySelected, sort } = this.state;
+    console.log('posts', posts)
 
     const postsRender = _.sortBy(posts, sort);
 
@@ -80,6 +85,7 @@ class Home extends Component {
                     commentCount={post.commentCount}
                     body={post.body}
                     voteScore={post.voteScore}
+                    onChange={(e) => this.onViewDetails(e, post.id)}
                   />
                 ))
                 :
@@ -94,6 +100,7 @@ class Home extends Component {
                     commentCount={post.commentCount}
                     body={post.body}
                     voteScore={post.voteScore}
+                    onChange={(e) => this.onViewDetails(e, post.id)}
                   />
                 ))
             }
