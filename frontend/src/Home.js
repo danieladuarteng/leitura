@@ -4,7 +4,10 @@ import PropTypes from 'prop-types'
 import * as LeituraAPI from './LeituraAPI'
 import Button from '@material-ui/core/Button';
 import Post from './Post';
+import _ from 'underscore';
+import  moment from 'moment'
 import './App.css';
+
 
 const categoriesList = [
   {
@@ -32,18 +35,27 @@ const categoriesList = [
 class Home extends Component {
   state = {
     categorySelected: 'all',
+    sort: '!voteScore',
   }
 
   onClick = async (categorySelected) => {
     if (categorySelected !== 'all') {
-      const ab = await LeituraAPI.getPostsForCategories(categorySelected)
+      await LeituraAPI.getPostsForCategories(categorySelected)
     }
     this.setState({ categorySelected })
   }
 
+  onSortBy = (e) => {
+    this.setState({
+      sort: e.target.value,
+    })
+  }
+
   render() {
     const { posts } = this.props;
-    const { categorySelected } = this.state;
+    const { categorySelected, sort } = this.state;
+
+    const postsRender = _.sortBy(posts, sort);
 
     return (
       <div>
@@ -54,29 +66,31 @@ class Home extends Component {
         <div className="grid-posts">
           <div className="grid-posts-item1">
             {
+
               categorySelected === 'all' ?
-                posts.map(post => (
+                postsRender.map(post => (
+
                   <Post
                     key={post.id}
                     id={post.id}
                     title={post.title}
                     category={post.category}
                     author={post.author}
-                    timestamp={post.timestamp}
+                    timestamp={moment(post.timestamp).format('DD/MM/YYYY')}
                     commentCount={post.commentCount}
                     body={post.body}
                     voteScore={post.voteScore}
                   />
                 ))
                 :
-                posts.filter(a => a.category === categorySelected).map(post => (
+                postsRender.filter(a => a.category === categorySelected).map(post => (
                   <Post
                     key={post.id}
                     id={post.id}
                     title={post.title}
                     category={post.category}
                     author={post.author}
-                    timestamp={post.timestamp}
+                    timestamp={moment(post.timestamp).format('DD/MM/YYYY')}
                     commentCount={post.commentCount}
                     body={post.body}
                     voteScore={post.voteScore}
@@ -92,13 +106,10 @@ class Home extends Component {
 
             <div className="categories">
               <h1>SORT BY </h1>
-              <select>
-                <option value="volvo">Date</option>
-                <option value="saab">Title</option>
-                <option value="opel">Author</option>
-                <option value="audi">Comments</option>
-                <option value="audi">More votes</option>
-                <option value="audi">Less votes</option>
+              <select onChange={(e) => this.onSortBy(e)}>
+                <option value="!voteScore">Votes</option>
+                <option value="timestamp">Date</option>
+                <option value="!commentCount">Comments</option>
               </select>
             </div>
 

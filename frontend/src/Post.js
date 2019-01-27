@@ -13,7 +13,7 @@ class Post extends Component {
             body,
             voteScore,
         } = this.props;
-        
+     
         return (
             <div className="post1" key={id}>
                 <Link to="/post"><h1>{title}</h1></Link>
