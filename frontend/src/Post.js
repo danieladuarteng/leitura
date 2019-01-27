@@ -12,11 +12,12 @@ class Post extends Component {
             commentCount,
             body,
             voteScore,
+            onChange,
         } = this.props;
-     
+ 
         return (
             <div className="post1" key={id}>
-                <Link to="/post"><h1>{title}</h1></Link>
+                <Link to={`/${category}/${id}`} onClick={onChange}><h1>{title}</h1></Link>
                 <div className="cabecalho">
                     <div className="box-1"><a href="blog/ti-para-todos/">{category}</a></div>
                     <div className="box-2"><a href="sobre-mim">{author}</a></div>

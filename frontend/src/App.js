@@ -29,7 +29,7 @@ class App extends Component {
           />
         )} />
 
-        <Route path="/post" render={() => (
+        <Route path={'/:category/:id'} render={() => (
           <ViewPost />
         )} />
 

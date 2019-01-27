@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 class ViewPost extends Component {
     render() {
+        console.log("view", this.state)
         return (
             <div>
                 <div className="home">
@@ -47,18 +48,18 @@ class ViewPost extends Component {
                                 <div className="remove-comment">
                                     REMOVE
                             </div>
-                            <div className="controls">
+                                <div className="controls">
                                     <div className="like-comment"></div>
                                     <div className="like-comment-text">30</div>
                                     <div className="deslike-comment"></div>
-                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="formulario">
+                        <div className="formulario">
                             <form name="falecomigo" method="post">
                                 <input id="nome" name="nome" type="text" placeholder="Name" required />
                                 <textarea name="mensagem" id="mensagem" rows="5" placeholder="Messege" required></textarea>
-                                <input type="submit" name="enviar" value="COMMENT" class="botaoEnviar"/>
+                                <input type="submit" name="enviar" value="COMMENT" className="botaoEnviar" />
                             </form>
                         </div>
                     </div>
@@ -66,7 +67,7 @@ class ViewPost extends Component {
                         <Link to="/update"><div id="edit-post">EDIT</div></Link>
                         <div id="remove-post">REMOVE</div>
                     </div>
-                       
+
                 </div>
             </div>
         );
