@@ -5,22 +5,15 @@ import ViewPost from './ViewPost';
 import UpdatePost from './UpdatePost';
 import { Route } from 'react-router-dom';
 import * as LeituraAPI from './LeituraAPI'
-import {connect} from 'react-redux'
-import {seePosts} from './actions'
+import { connect } from 'react-redux'
+import {handleInitialData} from './actions/shared'
+
 
 
 class App extends Component {
-  state = {//colocamos no state para que o React gerencie as atualizações 
-    
-    categories: {},
-  }
 
-  async componentDidMount() {//deixa de forma assincrona
-    const posts = await LeituraAPI.getAllPosts()//fala para esperar até pegar todos os dados
-    const categories = await LeituraAPI.getAllCategories()
-
-    this.seeAllPosts({posts})
-    this.setState({ posts, categories})
+  componentDidMount(){
+    this.props.dispatch(handleInitialData())
   }
 
   render() {
@@ -29,8 +22,6 @@ class App extends Component {
       <div>
         <Route exact path="/" render={() => (
           <Home
-            posts={this.state.posts}
-            categories={this.state.categories}
           />
         )} />
 
@@ -47,13 +38,6 @@ class App extends Component {
   }
 }
 
-function mapStateToProps (posts) {
-    return posts
-}
 
-function mapDispatchToProps(dispatch){
-  return {
-    seeAllPosts: (data) => dispatch(seePosts(data))
-} }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect()(App);
