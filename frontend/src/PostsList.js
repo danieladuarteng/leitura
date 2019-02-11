@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
-class Post extends Component {
+import {postDetails} from './actions/shared'
+
+class PostsList extends Component {
+
+    componentDidMount(){
+        this.props.dispatch(postDetails(this.props.id))
+      }
     render() {
         const {
             id,
@@ -14,9 +20,12 @@ class Post extends Component {
             voteScore,
             onChange,
         } = this.props;
+
+        console.log(this.props)
  
         return (
-            <div className="post1" key={id}>
+            <div className="post1">
+                
                 <Link to={`/${category}/${id}`} onClick={onChange}><h1>{title}</h1></Link>
                 <div className="cabecalho">
                     <div className="box-1"><a href="blog/ti-para-todos/">{category}</a></div>
@@ -49,12 +58,11 @@ class Post extends Component {
 }
 
 function mapStateToProps({ posts}, { id }) {
-    const post = posts[id]
-
     return {
         posts,
-        post
+        id,
+      
     }
 }
 
-export default connect(mapStateToProps)(Post)
+export default connect(mapStateToProps)(PostsList)

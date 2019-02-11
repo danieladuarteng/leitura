@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Home from './Home';
-import ViewPost from './ViewPost';
+import PostsList from './PostsList';
 import UpdatePost from './UpdatePost';
 import { Route } from 'react-router-dom';
 import * as LeituraAPI from './LeituraAPI'
@@ -21,12 +21,11 @@ class App extends Component {
     return (
       <div>
         <Route exact path="/" render={() => (
-          <Home
-          />
+          <Home />
         )} />
 
         <Route path={'/:category/:id'} render={() => (
-          <ViewPost />
+          <PostsList />
         )} />
 
 

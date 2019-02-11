@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import * as LeituraAPI from './LeituraAPI'
 import Button from '@material-ui/core/Button';
-import Post from './Post';
+import PostsList from './PostsList';
 import _ from 'underscore';
 import  moment from 'moment'
 import './App.css';
@@ -74,7 +74,7 @@ class Home extends Component {
             {
               categorySelected === 'all' ?
                 postsRender.map(post => (
-                  <Post
+                  <PostsList
                     key={post.id}
                     id={post.id}
                     title={post.title}
@@ -89,7 +89,7 @@ class Home extends Component {
                 ))
                 :
                 postsRender.filter(a => a.category === categorySelected).map(post => (
-                  <Post
+                  <PostsList
                     key={post.id}
                     id={post.id}
                     title={post.title}
