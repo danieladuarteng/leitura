@@ -7,6 +7,7 @@ import Post from './Post';
 import _ from 'underscore';
 import  moment from 'moment'
 import './App.css';
+import { connect } from 'react-redux'
 
 
 const categoriesList = [
@@ -71,10 +72,8 @@ class Home extends Component {
         <div className="grid-posts">
           <div className="grid-posts-item1">
             {
-
               categorySelected === 'all' ?
                 postsRender.map(post => (
-
                   <Post
                     key={post.id}
                     id={post.id}
@@ -141,9 +140,10 @@ class Home extends Component {
   }
 }
 
-Home.propTypes = {
-  posts: PropTypes.array.isRequired,
-  categories: PropTypes.object.isRequired,
-};
+function mapStateToProps({ posts}) {
+  return {
+      posts
+  }
+}
 
-export default Home;
+export default connect(mapStateToProps)(Home);
