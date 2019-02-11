@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-
+import { connect } from 'react-redux'
 class Post extends Component {
     render() {
         const {
@@ -48,4 +48,13 @@ class Post extends Component {
     }
 }
 
-export default Post
+function mapStateToProps({ posts}, { id }) {
+    const post = posts[id]
+
+    return {
+        posts,
+        post
+    }
+}
+
+export default connect(mapStateToProps)(Post)
