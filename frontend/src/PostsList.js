@@ -5,9 +5,6 @@ import {postDetails} from './actions/shared'
 
 class PostsList extends Component {
 
-    componentDidMount(){
-        this.props.dispatch(postDetails(this.props.id))
-      }
     render() {
         const {
             id,
@@ -57,12 +54,6 @@ class PostsList extends Component {
     }
 }
 
-function mapStateToProps({ posts}, { id }) {
-    return {
-        posts,
-        id,
-      
-    }
-}
 
-export default connect(mapStateToProps)(PostsList)
+
+export default connect()(PostsList)
