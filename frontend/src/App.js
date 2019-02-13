@@ -7,6 +7,7 @@ import { Route } from 'react-router-dom';
 import * as LeituraAPI from './LeituraAPI'
 import { connect } from 'react-redux'
 import {handleInitialData} from './actions/shared'
+import PostDetails from './UpdatePost';
 
 
 
@@ -25,7 +26,7 @@ class App extends Component {
         )} />
 
         <Route path={'/:category/:id'} render={() => (
-          <PostsList />
+          <PostDetails />
         )} />
 
 
