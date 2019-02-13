@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-class ViewPost extends Component {
+class PostDetails extends Component {
     render() {
         return (
             <div>
@@ -17,7 +17,7 @@ class ViewPost extends Component {
                                <input id="nome" name="nome" type="text" placeholder="Categorie" required />
                                <input id="nome" name="nome" type="text" placeholder="Author" required />
                                 <textarea name="mensagem" id="mensagem" rows="5" placeholder="Body" required></textarea>
-                                <input type="submit" name="enviar" value="UPDATE" class="botaoEnviar"/>
+                                <input type="submit" name="enviar" value="UPDATE" className="botaoEnviar"/>
                             </form>
                         </div>
                         <div className="white-line"></div>
@@ -50,19 +50,18 @@ class ViewPost extends Component {
                             <form name="falecomigo" method="post">
                                 <input id="nome" name="nome" type="text" placeholder="Name" required />
                                 <textarea name="mensagem" id="mensagem" rows="5" placeholder="Messege" required></textarea>
-                                <input type="submit" name="enviar" value="COMMENT" class="botaoEnviar"/>
+                                <input type="submit" name="enviar" value="COMMENT" className="botaoEnviar"/>
                             </form>
                         </div>
                     </div>
                     <div className="item-sidebar">
                         <div id="edit-post">EDIT</div>
                         <div id="remove-post">REMOVE</div>
-                    </div>
-                       
+                    </div> 
                 </div>
             </div>
         );
     }
 }
 
-export default ViewPost;
+export default PostDetails;

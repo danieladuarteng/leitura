@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';
 
-class ViewPost extends Component {
+class PostDetails extends Component {
     render() {
-        console.log("view", this.state)
+        console.log("view", this.props)
         return (
             <div>
                 <div className="home">
@@ -74,4 +74,4 @@ class ViewPost extends Component {
     }
 }
 
-export default ViewPost;
+export default connect() (PostDetails)
