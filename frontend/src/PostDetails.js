@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
+import moment from 'moment';
+import { handleInitialData, postDetails } from './actions/shared'
 
-class PostDetails extends Component {
+class PostDetails extends Component {    
     render() {
         console.log("view", this.props)
+        const {title, category, author, timestamp, voteStore, body, commentCount} = this.props.post
         return (
             <div>
                 <div className="home">
@@ -13,25 +17,22 @@ class PostDetails extends Component {
 
                 <div className="container-view">
                     <div className="item-main">
-                        <h1>Tecnologia é só coisa de homem?</h1>
+                        <h1>{title}</h1>
                         <div className="cabecalho">
-                            <div className="box-1"><a href="../mulheres-ti/">MULHERES TI</a></div>
-                            <div className="box-2"><a href="../../sobre-mim">Daniela Duarte</a></div>
-                            <div className="box-3">07 de dezembro de 2017</div>
+                            <div className="box-1">{category}</div>
+                            <div className="box-2">{author}</div>
+                            <div className="box-3">{moment(timestamp).format('DD/MM/YYYY')}</div>
                             <div className="icons">
                                 <div className="like-button"></div>
-                                <div className="like-button-text">30</div>
+                                <div className="like-button-text">{voteStore}</div>
                                 <div className="deslike-button"></div>
                             </div>
                         </div>
                         <p>
-                            Toda vez que falamos do departamento de tecnologia,
-                            se imagina um grupo de homens sentados em frente ao computador,
-                            mas afinal essa área só contrata homem? Claro que não.
-                            A área de tecnologia é como as outras, feita de homens e mulheres.
+                            {body}
                         </p>
                         <div className="comments">
-                            <p>26 comments</p>
+                            <p>{commentCount} comments</p>
                             <div className="container-comments">
                                 <div className="author">
                                     Ana
@@ -74,4 +75,11 @@ class PostDetails extends Component {
     }
 }
 
-export default PostDetails
+function mapStateToProps({ post},{id}) {
+   //const post = Object.keys(posts).filter(item => posts[item].id  === id)
+    return {
+        post: post,
+    }
+  }
+
+  export default connect(mapStateToProps)(PostDetails)

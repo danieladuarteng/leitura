@@ -5,10 +5,10 @@ import * as LeituraAPI from './LeituraAPI'
 import Button from '@material-ui/core/Button';
 import PostsList from './PostsList';
 import _ from 'underscore';
-import  moment from 'moment'
+import moment from 'moment'
 import './App.css';
 import { connect } from 'react-redux'
-import {handleInitialData, postDetails} from './actions/shared'
+import { handleInitialData, postDetails } from './actions/shared'
 
 
 const categoriesList = [
@@ -53,7 +53,7 @@ class Home extends Component {
     })
   }
 
-  onViewDetails = async (e, post) =>{
+  onViewDetails = async (e, post) => {
     await this.props.dispatch(postDetails(post))
   }
 
@@ -141,9 +141,9 @@ class Home extends Component {
   }
 }
 
-function mapStateToProps({ posts}) {
+function mapStateToProps({ posts }) {
   return {
-      posts
+    posts
   }
 }
 

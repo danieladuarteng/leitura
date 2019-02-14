@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux'
-import {postDetails} from './actions/shared'
-
 class PostsList extends Component {
 
     render() {
@@ -23,7 +20,7 @@ class PostsList extends Component {
         return (
             <div className="post1">
                 
-                <Link to={`/${category}/${id}`} onClick={onChange}><h1>{title}</h1></Link>
+                <Link to={`/${category}/${id}`} id={id} onClick={onChange}><h1>{title}</h1></Link>
                 <div className="cabecalho">
                     <div className="box-1"><a href="blog/ti-para-todos/">{category}</a></div>
                     <div className="box-2"><a href="sobre-mim">{author}</a></div>
@@ -54,6 +51,4 @@ class PostsList extends Component {
     }
 }
 
-
-
-export default connect()(PostsList)
+export default PostsList
