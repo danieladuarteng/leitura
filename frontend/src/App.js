@@ -7,7 +7,7 @@ import { Route } from 'react-router-dom';
 import * as LeituraAPI from './LeituraAPI'
 import { connect } from 'react-redux'
 import {handleInitialData} from './actions/shared'
-import PostDetails from './UpdatePost';
+import PostDetails from './PostDetails';
 
 
 
