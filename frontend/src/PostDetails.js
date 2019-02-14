@@ -74,4 +74,4 @@ class PostDetails extends Component {
     }
 }
 
-export default connect() (PostDetails)
+export default PostDetails
