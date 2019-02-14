@@ -1,4 +1,4 @@
-import { RECEIVE_POSTS, POST_DETAILS } from "../actions/posts";
+import { RECEIVE_POSTS } from "../actions/posts";
 
 export default function posts(state = [], action) {
     switch (action.type) {
@@ -6,11 +6,6 @@ export default function posts(state = [], action) {
             return {
                 ...state,
                 ...action.posts
-            }
-        case POST_DETAILS:
-            return {
-                ...state,
-                ...action.post
             }
         default:
             return state
