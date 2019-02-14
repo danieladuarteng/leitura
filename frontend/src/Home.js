@@ -8,6 +8,7 @@ import _ from 'underscore';
 import  moment from 'moment'
 import './App.css';
 import { connect } from 'react-redux'
+import {handleInitialData, postDetails} from './actions/shared'
 
 
 const categoriesList = [
@@ -53,7 +54,7 @@ class Home extends Component {
   }
 
   onViewDetails = async (e, post) =>{
-    await LeituraAPI.getPostDetails(post)
+    await this.props.dispatch(postDetails(post))
   }
 
   render() {
