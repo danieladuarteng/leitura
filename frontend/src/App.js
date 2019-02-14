@@ -3,13 +3,11 @@ import './App.css';
 import Home from './Home';
 import PostsList from './PostsList';
 import UpdatePost from './UpdatePost';
-import { Route } from 'react-router-dom';
+import { Route, HashRouter as Router, Switch } from "react-router-dom"
 import * as LeituraAPI from './LeituraAPI'
 import { connect } from 'react-redux'
-import {handleInitialData} from './actions/shared'
+import {handleInitialData, postDetails} from './actions/shared'
 import PostDetails from './PostDetails';
-
-
 
 class App extends Component {
 
@@ -20,21 +18,17 @@ class App extends Component {
   render() {
     console.log("props", this.props)
     return (
-      <div>
-        <Route exact path="/" render={() => (
-          <Home />
-        )} />
+      <Router>
+        <Switch>
+          <Route exact path="/" render={() => <Home />} />
 
-        <Route path={'/:category/:id'} render={() => (
-          <PostDetails />
-        )} />
+          <Route path={"/:category/:id"} render={() => <PostDetails />} />
 
-
-        <Route path="/update" render={() => (
-          <UpdatePost />
-        )} />
-      </div>
-    );
+          <Route path="/update" render={() => <UpdatePost />} />
+        </Switch>
+      </Router>
+    )
+  
   }
 }
 
