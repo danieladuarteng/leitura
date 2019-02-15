@@ -67,4 +67,20 @@ export const getPostDetails = (postId) =>
             return error
         })
 
+export const getPostComments = (postId) =>
+    fetch(`${api}/posts/${postId}/comments`, {
+        method: 'get',
+        headers
+    })
+        .then(res => res.json())
+        .then(data => {
+            console.log("post com commentários", postId)
+            console.log(data)
+            return data
+        })
+        .catch(error => {
+            console.log(error)
+            return error
+        })
+
 export default api;

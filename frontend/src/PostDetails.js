@@ -3,15 +3,16 @@ import './App.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import moment from 'moment';
-import { handleInitialData, postDetails } from './actions/shared'
+import { handleInitialData, postDetails, postComments } from './actions/shared'
 
 class PostDetails extends Component {
     componentDidMount() {
         this.props.dispatch(postDetails(this.props.match.params.id))
+        this.props.dispatch(postComments(this.props.match.params.id))
     }
 
     render() {
-        console.log(this.props.match.params.id);
+        console.log(this.props.post.comments);
         const { title, category, author, timestamp, voteStore, body, commentCount } = this.props.post
         return (
             <div>
@@ -39,7 +40,7 @@ class PostDetails extends Component {
                             <p>{commentCount} comments</p>
                             <div className="container-comments">
                                 <div className="author">
-                                    Ana
+                                    {this.props.comments}
                             </div>
                                 <div className="date">
                                     Commented at 01/30/2018
@@ -80,10 +81,11 @@ class PostDetails extends Component {
 }
 
 
-function mapStateToProps({ post }, { id }) {
+function mapStateToProps({ post, comments }) {
     //const post = Object.keys(posts).filter(item => posts[item].id  === id)
     return {
-        post: post,
+        post,
+        comments,
     }
 }
 

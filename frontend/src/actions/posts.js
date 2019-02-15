@@ -1,5 +1,6 @@
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const POST_DETAILS = 'POST_DETAILS'
+export const GET_POST_COMMENTS = 'GET_POST_COMMENTS'
 
 export function receivePosts(posts) {
     return {
@@ -14,3 +15,11 @@ export function receivePostDetails(post) {
         post: post
     }
 }
+
+export function receivePostComments(comments){
+    return{
+        type: GET_POST_COMMENTS,
+        comments,
+    }
+}
+
