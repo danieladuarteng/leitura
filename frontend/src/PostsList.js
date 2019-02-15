@@ -20,7 +20,7 @@ class PostsList extends Component {
         return (
             <div className="post1">
                 
-                <Link to={`/${category}/${id}`} id={id} onClick={onChange}><h1>{title}</h1></Link>
+                <Link to={`/${category}/${id}`}><h1>{title}</h1></Link>
                 <div className="cabecalho">
                     <div className="box-1"><a href="blog/ti-para-todos/">{category}</a></div>
                     <div className="box-2"><a href="sobre-mim">{author}</a></div>

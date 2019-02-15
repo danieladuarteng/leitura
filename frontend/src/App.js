@@ -20,11 +20,11 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" render={() => <Home />} />
+          <Route exact path="/" component={Home} />
 
-          <Route path={"/:category/:id"} render={() => <PostDetails />} />
+          <Route path={"/:category/:id"} component={PostDetails} />
 
-          <Route path="/update" render={() => <UpdatePost />} />
+          <Route path="/update" component={UpdatePost} />
         </Switch>
       </Router>
     )

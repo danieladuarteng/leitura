@@ -5,10 +5,14 @@ import { connect } from 'react-redux'
 import moment from 'moment';
 import { handleInitialData, postDetails } from './actions/shared'
 
-class PostDetails extends Component {    
+class PostDetails extends Component {
+    componentDidMount() {
+        this.props.dispatch(postDetails(this.props.match.params.id))
+    }
+
     render() {
-        console.log("view", this.props)
-        const {title, category, author, timestamp, voteStore, body, commentCount} = this.props.post
+        console.log(this.props.match.params.id);
+        const { title, category, author, timestamp, voteStore, body, commentCount } = this.props.post
         return (
             <div>
                 <div className="home">
@@ -70,16 +74,17 @@ class PostDetails extends Component {
                     </div>
 
                 </div>
-            </div>
-        );
+            </div>                
+    );
     }
 }
 
-function mapStateToProps({ post},{id}) {
-   //const post = Object.keys(posts).filter(item => posts[item].id  === id)
+
+function mapStateToProps({ post }, { id }) {
+    //const post = Object.keys(posts).filter(item => posts[item].id  === id)
     return {
         post: post,
     }
-  }
+}
 
-  export default connect(mapStateToProps)(PostDetails)
+export default connect(mapStateToProps)(PostDetails)
