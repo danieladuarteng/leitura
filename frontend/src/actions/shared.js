@@ -1,9 +1,6 @@
 import { getAllPosts, getPostDetails, getPostComments, createPost } from '../LeituraAPI'
 import { receivePosts, receivePostDetails, receivePostComments, newPost } from './posts'
 
-
-const genereteId = Math.random().toString(36).substr(-8)
-
 export function handleInitialData() {
     return (dispatch) => {
         return getAllPosts()
@@ -34,7 +31,6 @@ export function postComments(id) {
 export function addPost(post) {
 
     const postContent = {
-        id: genereteId,
         timestamp: post.timestamp,
         title: post.title,
         body: post.body,

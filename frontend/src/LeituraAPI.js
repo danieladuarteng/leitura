@@ -89,7 +89,7 @@ export const createPost = (post) =>
         method: 'POST',
         headers,
         body: JSON.stringify({
-            id: post.id,
+            id: Math.random().toString(36).substr(-8),
             timestamp: post.timestamp,
             title: post.title,
             body: post.body,
