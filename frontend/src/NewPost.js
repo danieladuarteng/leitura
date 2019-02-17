@@ -44,7 +44,7 @@ const categoriesList = [
     },
 ];
 
-class UpdatePost extends Component {
+class NewPost extends Component {
 
     constructor() {
         super();
@@ -172,4 +172,4 @@ class UpdatePost extends Component {
         );
     }
 }
-export default connect()(withStyles(styles)(UpdatePost));
+export default connect()(withStyles(styles)(NewPost));
