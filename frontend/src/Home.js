@@ -99,7 +99,7 @@ class Home extends Component {
 
           <div className="grid-posts-item2">
             <div className="meconheca">
-              <Link to="/update"><div className="botaoEnviar">NEW POST</div></Link>
+              <Link to="/newpost"><div className="botaoEnviar">NEW POST</div></Link>
             </div>
 
             <div className="categories">

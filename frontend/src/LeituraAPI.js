@@ -2,7 +2,8 @@ const api = "http://localhost:3001";
 
 const headers = {
     'Accept': 'application/json',
-    'Authorization': 'whatever-you-want'
+    'Authorization': 'whatever-you-want',
+    'Content-Type': 'application/json',
 }
 
 export const getAllPosts = () =>
@@ -82,5 +83,56 @@ export const getPostComments = (postId) =>
             console.log(error)
             return error
         })
+
+
+
+export const createPost = (post) => 
+    fetch(`${api}/posts`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+            id: post.id,
+            timestamp: post.timestamp,
+            title: post.title,
+            body: post.body,
+            author: post.author,
+            category: post.category,
+            voteScore: post.voteScore,
+            deleted: post.deleted,
+            commentCount: post.commentCount,
+        })
+    }).then(res => res.json())
+    .then(data => {
+        console.log("post com commentários", post)
+        console.log(data)
+        return data
+    })
+
+
+       
+// export const createPost = (post) => {
+//     return dispatch => {
+//       dispatch({
+//         type: LOADING
+//       })
+
+//         axios({
+//           method: 'post',
+//           headers: headers,
+//           url: `${api}/posts`,
+//           data: {
+//             id: Math.random().toString(36).substr(-8),
+//             timestamp: Date.now(),
+//             title: post.title,
+//             body: post.body,
+//             author: post.author,
+//             category: post.category
+//           }
+//         })
+
+
+
+// }
+
 
 export default api;

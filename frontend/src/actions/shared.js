@@ -1,5 +1,9 @@
-import { getAllPosts, getPostDetails, getPostComments } from '../LeituraAPI'
-import { receivePosts, receivePostDetails, receivePostComments } from './posts'
+import { getAllPosts, getPostDetails, getPostComments, createPost } from '../LeituraAPI'
+import { receivePosts, receivePostDetails, receivePostComments, newPost } from './posts'
+
+let genereteId = localStorage.token
+if (!genereteId)
+    genereteId = localStorage.token = Math.random().toString(36).substr(-8)
 
 export function handleInitialData() {
     return (dispatch) => {
@@ -23,10 +27,36 @@ export function postDetails(id) {
 export function postComments(id) {
     return (dispatch) => {
         return getPostComments(id)
-            .then(comments =>{
+            .then(comments => {
                 dispatch(receivePostComments(comments))
             })
     }
 }
+
+export function addPost(post) {
+    console.log(post)
+    const postContent = {
+        id: genereteId,
+        timestamp: post.timestamp,
+        title: post.title,
+        body: post.body,
+        author: post.author,
+        category: post.category,
+        voteScore: 1,
+        deleted: false,
+        commentCount: 0
+    }
+    console.log(postContent)
+
+    return dispatch => {
+        return createPost(postContent)
+            .then(resp => dispatch(newPost(resp)))
+            .catch(e => {
+                console.warn('Error in createPost: ', e)
+            })
+    }
+}
+
+
 
 
