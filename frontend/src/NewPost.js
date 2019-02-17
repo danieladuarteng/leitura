@@ -125,7 +125,7 @@ class UpdatePost extends Component {
                                     {categoriesList.map(option => (
                                         <MenuItem
                                             key={option.id}
-                                            value={option.title}
+                                            value={option.category}
                                         >
                                             {option.title}
                                         </MenuItem>

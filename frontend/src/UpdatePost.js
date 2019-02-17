@@ -13,11 +13,11 @@ class UpdatePost extends Component {
                     <div className="item-main">
                         <div className="formulario">
                             <form name="falecomigo" method="post">
-                               <input id="nome" name="nome" type="text" placeholder="Title" required />
-                               <input id="nome" name="nome" type="text" placeholder="Categorie" required />
-                               <input id="nome" name="nome" type="text" placeholder="Author" required />
+                                <input id="nome" name="nome" type="text" placeholder="Title" required />
+                                <input id="nome" name="nome" type="text" placeholder="Categorie" required />
+                                <input id="nome" name="nome" type="text" placeholder="Author" required />
                                 <textarea name="mensagem" id="mensagem" rows="5" placeholder="Body" required></textarea>
-                                <input type="submit" name="enviar" value="UPDATE" className="botaoEnviar"/>
+                                <input type="submit" name="enviar" value="UPDATE" className="botaoEnviar" />
                             </form>
                         </div>
                         <div className="white-line"></div>
@@ -39,25 +39,25 @@ class UpdatePost extends Component {
                                 <div className="remove-comment">
                                     REMOVE
                             </div>
-                            <div className="controls">
+                                <div className="controls">
                                     <div className="like-comment"></div>
                                     <div className="like-comment-text">30</div>
                                     <div className="deslike-comment"></div>
-                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div className="formulario">
                             <form name="falecomigo" method="post">
                                 <input id="nome" name="nome" type="text" placeholder="Name" required />
                                 <textarea name="mensagem" id="mensagem" rows="5" placeholder="Messege" required></textarea>
-                                <input type="submit" name="enviar" value="COMMENT" className="botaoEnviar"/>
+                                <input type="submit" name="enviar" value="COMMENT" className="botaoEnviar" />
                             </form>
                         </div>
                     </div>
                     <div className="item-sidebar">
                         <div id="edit-post">EDIT</div>
                         <div id="remove-post">REMOVE</div>
-                    </div> 
+                    </div>
                 </div>
             </div>
         );

@@ -1,9 +1,8 @@
 import { getAllPosts, getPostDetails, getPostComments, createPost } from '../LeituraAPI'
 import { receivePosts, receivePostDetails, receivePostComments, newPost } from './posts'
 
-let genereteId = localStorage.token
-if (!genereteId)
-    genereteId = localStorage.token = Math.random().toString(36).substr(-8)
+
+const genereteId = Math.random().toString(36).substr(-8)
 
 export function handleInitialData() {
     return (dispatch) => {
@@ -13,7 +12,6 @@ export function handleInitialData() {
             })
     }
 }
-
 
 export function postDetails(id) {
     return (dispatch) => {
@@ -34,7 +32,7 @@ export function postComments(id) {
 }
 
 export function addPost(post) {
-    console.log(post)
+
     const postContent = {
         id: genereteId,
         timestamp: post.timestamp,
@@ -46,7 +44,6 @@ export function addPost(post) {
         deleted: false,
         commentCount: 0
     }
-    console.log(postContent)
 
     return dispatch => {
         return createPost(postContent)
@@ -56,7 +53,3 @@ export function addPost(post) {
             })
     }
 }
-
-
-
-

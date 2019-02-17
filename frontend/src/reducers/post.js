@@ -8,10 +8,10 @@ export default function post(state = [], action) {
                 ...action.post
             }
         case GET_POST_COMMENTS:
-            const orderVote = action.comments.sort((a,b) =>{
+            const orderVote = action.comments.sort((a, b) => {
                 return b.voteScore - a.voteScore
             })
-            return{
+            return {
                 ...state,
                 comments: [
                     ...orderVote,
@@ -21,4 +21,3 @@ export default function post(state = [], action) {
             return state
     }
 }
-

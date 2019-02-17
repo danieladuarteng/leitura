@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-class PostsList extends Component {
 
+class PostsList extends Component {
     render() {
         const {
             id,
