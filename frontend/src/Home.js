@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types'
 import * as LeituraAPI from './LeituraAPI'
 import Button from '@material-ui/core/Button';
 import PostsList from './PostsList';
 import _ from 'underscore';
 import moment from 'moment'
-import './App.css';
 import { connect } from 'react-redux'
-import { handleInitialData, postDetails } from './actions/shared'
 
+import './App.css';
 
 const categoriesList = [
   {
@@ -53,14 +51,9 @@ class Home extends Component {
     })
   }
 
-  onViewDetails = async (e, post) => {
-    await this.props.dispatch(postDetails(post))
-  }
-
   render() {
     const { posts } = this.props;
     const { categorySelected, sort } = this.state;
-    console.log('posts', posts)
 
     const postsRender = _.sortBy(posts, sort);
 
@@ -85,7 +78,6 @@ class Home extends Component {
                     commentCount={post.commentCount}
                     body={post.body}
                     voteScore={post.voteScore}
-                    onChange={(e) => this.onViewDetails(e, post.id)}
                   />
                 ))
                 :
@@ -100,7 +92,6 @@ class Home extends Component {
                     commentCount={post.commentCount}
                     body={post.body}
                     voteScore={post.voteScore}
-                    onChange={(e) => this.onViewDetails(e, post.id)}
                   />
                 ))
             }

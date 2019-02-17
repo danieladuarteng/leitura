@@ -12,11 +12,8 @@ class PostsList extends Component {
             commentCount,
             body,
             voteScore,
-            onChange,
         } = this.props;
 
-        console.log(this.props)
- 
         return (
             <div className="post1">
                 
@@ -33,14 +30,14 @@ class PostsList extends Component {
                     <p>{body}</p>
                 </div>
 
-                <a href="blog/ti-para-todos/como-foi-minha-primeira-vez-em-um-hackathon">
+                <Link to={`/${category}/${id}`}>
                     <div className="botaoEnviar">CONTINUE LENDO</div>
                     <div className="icons-post">
                         <div className="like-post"></div>
                         <div className="like-post-text">{voteScore}</div>
                         <div className="deslike-post"></div>
                     </div>
-                </a>
+                </Link>
 
                 <div className="edit-or-remove">
                     <Link to="/update"><div id="edit-post">EDIT</div></Link>
