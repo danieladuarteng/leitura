@@ -3,7 +3,8 @@ import './App.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import moment from 'moment';
-import { handleInitialData, postDetails, postComments } from './actions/shared'
+import { postDetails, postComments } from './actions/shared'
+import CommentsList from './CommentsList'
 
 class PostDetails extends Component {
     componentDidMount() {
@@ -12,8 +13,7 @@ class PostDetails extends Component {
     }
 
     render() {
-        console.log(this.props.post.comments);
-        const { title, category, author, timestamp, voteStore, body, commentCount } = this.props.post
+        const { id, title, category, author, timestamp, voteScore, body, commentCount } = this.props.post
         return (
             <div>
                 <div className="home">
@@ -29,63 +29,33 @@ class PostDetails extends Component {
                             <div className="box-3">{moment(timestamp).format('DD/MM/YYYY')}</div>
                             <div className="icons">
                                 <div className="like-button"></div>
-                                <div className="like-button-text">{voteStore}</div>
+                                <div className="like-button-text">{voteScore}</div>
                                 <div className="deslike-button"></div>
                             </div>
                         </div>
                         <p>
                             {body}
                         </p>
-                        <div className="comments">
-                            <p>{commentCount} comments</p>
-                            <div className="container-comments">
-                                <div className="author">
-                                    {this.props.comments}
-                            </div>
-                                <div className="date">
-                                    Commented at 01/30/2018
-                            </div>
-                                <div className="comment-content">
-                                    Amei seu post, muito legal
-                            </div>
-                                <div className="edit-comment">
-                                    EDIT
-                            </div>
-                                <div className="remove-comment">
-                                    REMOVE
-                            </div>
-                                <div className="controls">
-                                    <div className="like-comment"></div>
-                                    <div className="like-comment-text">30</div>
-                                    <div className="deslike-comment"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="formulario">
-                            <form name="falecomigo" method="post">
-                                <input id="nome" name="nome" type="text" placeholder="Name" required />
-                                <textarea name="mensagem" id="mensagem" rows="5" placeholder="Messege" required></textarea>
-                                <input type="submit" name="enviar" value="COMMENT" className="botaoEnviar" />
-                            </form>
-                        </div>
+                        <CommentsList
+                            id={id}
+                            commentCount={commentCount}
+                        />
                     </div>
+                    
                     <div className="item-sidebar">
                         <Link to="/update"><div id="edit-post">EDIT</div></Link>
                         <div id="remove-post">REMOVE</div>
                     </div>
-
                 </div>
-            </div>                
-    );
+            </div>
+        );
     }
 }
 
 
-function mapStateToProps({ post, comments }) {
-    //const post = Object.keys(posts).filter(item => posts[item].id  === id)
+function mapStateToProps({ post }) {
     return {
         post,
-        comments,
     }
 }
 
