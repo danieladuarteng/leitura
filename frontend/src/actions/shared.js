@@ -1,9 +1,10 @@
-import { 
+import {
     getAllPosts,
-    getPostDetails, 
-    getPostComments, 
+    getPostDetails,
+    getPostComments,
     createPost,
-    editPost, 
+    editPost,
+    deletePost,
 } from '../LeituraAPI'
 import {
     receivePosts,
@@ -11,6 +12,7 @@ import {
     receivePostComments,
     newPost,
     editPostAction,
+    deletePostAction,
 } from './posts'
 
 export function handleInitialData() {
@@ -64,10 +66,23 @@ export function addPost(post) {
 
 export function handleEditPost(id, edited) {
     return dispatch => {
-        return  editPost(id, edited)
-        .then(resp => dispatch(editPostAction(resp)))
-        .catch(e => {
-            console.warn('Error in editPost: ', e)
-        })
+        return editPost(id, edited)
+            .then(resp => dispatch(editPostAction(resp)))
+            .catch(e => {
+                console.warn('Error in editPost: ', e)
+            })
+    }
+}
+
+
+export function handleDeletePost(id) {
+    return dispatch => {
+        return deletePost(id)
+            .then(resp => {
+                dispatch(deletePostAction(resp))
+            })
+            .catch(e => {
+                console.warn('Error in deletePost: ', e)
+            })
     }
 }

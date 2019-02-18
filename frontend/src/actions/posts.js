@@ -3,6 +3,7 @@ export const POST_DETAILS = 'POST_DETAILS'
 export const GET_POST_COMMENTS = 'GET_POST_COMMENTS'
 export const NEW_POST = 'NEW_POST'
 export const EDIT_POST = 'EDIT_POST'
+export const DELETE_POST = 'DELETE_POST'
 
 export function receivePosts(posts) {
     return {
@@ -35,6 +36,13 @@ export function newPost(post) {
 export function editPostAction(post) {
     return {
         type: EDIT_POST,
+        post,
+    }
+}
+
+export function deletePostAction(post) {
+    return {
+        type: DELETE_POST,
         post,
     }
 }

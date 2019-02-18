@@ -121,5 +121,15 @@ export const editPost = (id, edited) =>
             return data
         })
 
+export const deletePost = id =>
+    fetch(`${api}/posts/${id}`, {
+        method: 'DELETE',
+        headers
+    }).then(res => res.json())
+    .then(data => {
+        console.log("post deleted", id)
+        console.log(data)
+        return data
+    })
 
 export default api
