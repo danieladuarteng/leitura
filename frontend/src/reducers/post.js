@@ -1,4 +1,4 @@
-import { POST_DETAILS, GET_POST_COMMENTS } from "../actions/posts";
+import { POST_DETAILS, GET_POST_COMMENTS, EDIT_POST } from "../actions/posts";
 
 export default function post(state = [], action) {
     switch (action.type) {
@@ -17,6 +17,11 @@ export default function post(state = [], action) {
                     ...orderVote,
                 ]
             }
+        case EDIT_POST:
+        return{
+            ...state,
+            ...action.post,
+        }
         default:
             return state
     }

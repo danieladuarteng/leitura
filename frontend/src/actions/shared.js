@@ -1,5 +1,17 @@
-import { getAllPosts, getPostDetails, getPostComments, createPost } from '../LeituraAPI'
-import { receivePosts, receivePostDetails, receivePostComments, newPost } from './posts'
+import { 
+    getAllPosts,
+    getPostDetails, 
+    getPostComments, 
+    createPost,
+    editPost, 
+} from '../LeituraAPI'
+import {
+    receivePosts,
+    receivePostDetails,
+    receivePostComments,
+    newPost,
+    editPostAction,
+} from './posts'
 
 export function handleInitialData() {
     return (dispatch) => {
@@ -47,5 +59,15 @@ export function addPost(post) {
             .catch(e => {
                 console.warn('Error in createPost: ', e)
             })
+    }
+}
+
+export function handleEditPost(id, edited) {
+    return dispatch => {
+        return  editPost(id, edited)
+        .then(resp => dispatch(editPostAction(resp)))
+        .catch(e => {
+            console.warn('Error in editPost: ', e)
+        })
     }
 }

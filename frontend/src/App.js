@@ -21,11 +21,11 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
 
-          <Route path={"/:category/:id"} component={PostDetails} />
+          <Route path="/update/:id" component={UpdatePost} />
 
-          <Route path="/update" component={UpdatePost} />
+          <Route path="/:category/:id" component={PostDetails} />
 
-          <Route path="/newpost" component={NewPost} />>
+          <Route path="/newpost" component={NewPost} />
         </Switch>
       </Router>
     )

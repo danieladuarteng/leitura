@@ -39,10 +39,6 @@ class PostsList extends Component {
                     </div>
                 </Link>
 
-                <div className="edit-or-remove">
-                    <Link to="/update"><div id="edit-post">EDIT</div></Link>
-                    <div id="remove-post">REMOVE</div>
-                </div>
             </div>
         )
     }

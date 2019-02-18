@@ -106,4 +106,20 @@ export const createPost = (post) =>
             return data
         })
 
+export const editPost = (id, edited) =>
+    fetch(`${api}/posts/${id}`, {
+        method: 'PUT',
+        headers,
+        body: JSON.stringify({
+            title: edited.title,
+            body: edited.body,
+        })
+    }).then(res => res.json())
+        .then(data => {
+            console.log("post edited", edited)
+            console.log(data)
+            return data
+        })
+
+
 export default api

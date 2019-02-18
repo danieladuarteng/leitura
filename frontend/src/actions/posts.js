@@ -2,6 +2,7 @@ export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const POST_DETAILS = 'POST_DETAILS'
 export const GET_POST_COMMENTS = 'GET_POST_COMMENTS'
 export const NEW_POST = 'NEW_POST'
+export const EDIT_POST = 'EDIT_POST'
 
 export function receivePosts(posts) {
     return {
@@ -27,6 +28,13 @@ export function receivePostComments(comments) {
 export function newPost(post) {
     return {
         type: NEW_POST,
+        post,
+    }
+}
+
+export function editPostAction(post) {
+    return {
+        type: EDIT_POST,
         post,
     }
 }

@@ -41,9 +41,8 @@ class PostDetails extends Component {
                             commentCount={commentCount}
                         />
                     </div>
-                    
                     <div className="item-sidebar">
-                        <Link to="/update"><div id="edit-post">EDIT</div></Link>
+                    <Link to={`/update/${id}`}><div id="edit-post">EDIT</div></Link>
                         <div id="remove-post">REMOVE</div>
                     </div>
                 </div>
