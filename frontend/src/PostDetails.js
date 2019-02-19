@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
 import moment from 'moment';
 import { postDetails, postComments, handleDeletePost, handleInitialData } from './actions/shared'
@@ -8,6 +8,9 @@ import CommentsList from './CommentsList'
 import Button from '@material-ui/core/Button'
 
 class PostDetails extends Component {
+    state = {
+        toHome: false,
+    }
     componentDidMount() {
         this.props.dispatch(postDetails(this.props.match.params.id))
         this.props.dispatch(postComments(this.props.match.params.id))
@@ -16,10 +19,18 @@ class PostDetails extends Component {
     handleDelete = () => {
         const { dispatch } = this.props
         dispatch(handleDeletePost(this.props.match.params.id))
+        this.setState({
+            toHome: true
+        })
     }
 
     render() {
         const { id, title, category, author, timestamp, voteScore, body, commentCount } = this.props.post
+        const { toHome } = this.state
+
+        if (toHome === true) {
+            return <Redirect to='/' />
+        }
         return (
             <div>
                 <div className="home">
