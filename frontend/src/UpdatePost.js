@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import { postDetails, handleEditPost } from './actions/shared'
+import { Redirect } from 'react-router-dom';
 
 import './App.css';
 
@@ -32,6 +33,7 @@ class UpdatePost extends Component {
             title: '',
             body: '',
         },
+        toHome: false,
     };
 
     componentDidMount() {
@@ -58,10 +60,17 @@ class UpdatePost extends Component {
         e.preventDefault();
         const { dispatch } = this.props
         dispatch(handleEditPost(this.props.match.params.id, this.state.postEdited))
+
+        this.setState({ toHome: true })
     }
     render() {
         const { classes } = this.props;
         const { title, body } = this.state.postEdited
+        const { toHome } = this.state
+
+        if (toHome === true) {
+            return <Redirect to='/' />
+        }
 
         return (
             <div>
