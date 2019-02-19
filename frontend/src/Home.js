@@ -6,6 +6,7 @@ import PostsList from './PostsList';
 import _ from 'underscore';
 import moment from 'moment'
 import { connect } from 'react-redux'
+import { handleInitialData } from './actions/shared'
 
 import './App.css';
 
@@ -37,6 +38,11 @@ class Home extends Component {
     categorySelected: 'all',
     sort: '!voteScore',
   }
+
+  componentDidMount() {
+    this.props.dispatch(handleInitialData())
+  }
+
 
   onClick = async (categorySelected) => {
     if (categorySelected !== 'all') {

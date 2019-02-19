@@ -3,17 +3,12 @@ import Home from './Home'
 import UpdatePost from './UpdatePost'
 import { Route, HashRouter as Router, Switch } from "react-router-dom"
 import { connect } from 'react-redux'
-import { handleInitialData } from './actions/shared'
 import PostDetails from './PostDetails'
 import NewPost from './NewPost'
 
 import './App.css';
 
 class App extends Component {
-
-  componentDidMount() {
-    this.props.dispatch(handleInitialData())
-  }
 
   render() {
     return (
