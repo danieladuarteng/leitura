@@ -31,9 +31,11 @@ export function handleInitialData() {
 
 export function postDetails(id) {
     return (dispatch) => {
+        dispatch(showLoading())
         return getPostDetails(id)
             .then(post => {
                 dispatch(receivePostDetails(post))
+                dispatch(hideLoading())
                 return post;
             })
     }
