@@ -3,13 +3,19 @@ import './App.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import moment from 'moment';
-import { postDetails, postComments } from './actions/shared'
+import { postDetails, postComments, handleDeletePost, handleInitialData } from './actions/shared'
 import CommentsList from './CommentsList'
+import Button from '@material-ui/core/Button'
 
 class PostDetails extends Component {
     componentDidMount() {
         this.props.dispatch(postDetails(this.props.match.params.id))
         this.props.dispatch(postComments(this.props.match.params.id))
+    }
+
+    handleDelete = () => {
+        const { dispatch } = this.props
+        dispatch(handleDeletePost(this.props.match.params.id))
     }
 
     render() {
@@ -42,8 +48,16 @@ class PostDetails extends Component {
                         />
                     </div>
                     <div className="item-sidebar">
-                    <Link to={`/update/${id}`}><div id="edit-post">EDIT</div></Link>
-                        <div id="remove-post">REMOVE</div>
+                        <Link to={`/update/${id}`}><div id="edit-post">EDIT</div></Link>
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            type="submit"
+                            onClick={() => this.handleDelete()}
+                        >
+                            REMOVE
+                        </Button>
+
                     </div>
                 </div>
             </div>
