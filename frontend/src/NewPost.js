@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
 import { addPost } from './actions/shared'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom';
 
 import './App.css';
 
@@ -56,6 +57,7 @@ class NewPost extends Component {
                 author: '',
                 category: '',
             },
+            toHome: false,
         };
     }
 
@@ -72,12 +74,19 @@ class NewPost extends Component {
         e.preventDefault();
         const { dispatch } = this.props
         dispatch(addPost(this.state.post))
+
+        this.setState({ toHome: true })
     }
 
     render() {
 
         const { classes } = this.props;
         const { title, category, body, author } = this.state.post
+        const { toHome } = this.state
+
+        if (toHome === true) {
+            return <Redirect to='/' />
+        }
 
         return (
             <div>
