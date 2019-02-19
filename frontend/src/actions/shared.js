@@ -6,6 +6,7 @@ import {
     editPost,
     deletePost,
 } from '../LeituraAPI'
+
 import {
     receivePosts,
     receivePostDetails,
@@ -15,11 +16,15 @@ import {
     deletePostAction,
 } from './posts'
 
+import { showLoading, hideLoading } from 'react-redux-loading'
+
 export function handleInitialData() {
     return (dispatch) => {
+        dispatch(showLoading())
         return getAllPosts()
             .then((posts) => {
                 dispatch(receivePosts(posts))
+                dispatch(hideLoading())
             })
     }
 }
