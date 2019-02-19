@@ -29,6 +29,7 @@ export function postDetails(id) {
         return getPostDetails(id)
             .then(post => {
                 dispatch(receivePostDetails(post))
+                return post;
             })
     }
 }

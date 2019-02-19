@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import TextField from '@material-ui/core/TextField'
-import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
-import { addPost } from './actions/shared'
 import { connect } from 'react-redux'
-import { postDetails, postComments } from './actions/shared'
+import { postDetails, handleEditPost } from './actions/shared'
 
 import './App.css';
 
@@ -27,24 +25,6 @@ const styles = theme => ({
     },
 });
 
-const categoriesList = [
-    {
-        id: 0,
-        title: 'React',
-        category: 'react',
-    },
-    {
-        id: 1,
-        title: 'Redux',
-        category: 'redux',
-    },
-    {
-        id: 2,
-        title: 'Udacity',
-        category: 'udacity',
-    },
-];
-
 class UpdatePost extends Component {
 
     state = {
@@ -54,11 +34,16 @@ class UpdatePost extends Component {
         },
     };
 
-
     componentDidMount() {
-        this.props.dispatch(postDetails(this.props.match.params.id))
+        this.props.dispatch(postDetails(this.props.match.params.id)).then(mydata => {
+            this.setState({
+                postEdited: {
+                    title: mydata.title,
+                    body: mydata.body,
+                },
+            })
+        });
     }
-
 
     handleChange = name => event => {
         this.setState({
@@ -72,13 +57,12 @@ class UpdatePost extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const { dispatch } = this.props
-        dispatch(addPost(this.state.post))
+        dispatch(handleEditPost(this.props.match.params.id, this.state.postEdited))
     }
     render() {
         const { classes } = this.props;
-        console.log(this.props)
-        const { title, category, body, author } = this.props.post
-        console.log(this.state.postEdited)
+        const { title, body } = this.state.postEdited
+
         return (
             <div>
                 <div className="home">
@@ -136,14 +120,10 @@ class UpdatePost extends Component {
     }
 }
 
-
-function mapStateToProps({ post }, {id}) {
-    const postId = id;
+function mapStateToProps({ post }) {
     return {
         post,
-        postId
     }
 }
-
 
 export default connect(mapStateToProps)(withStyles(styles)(UpdatePost));
