@@ -1,6 +1,7 @@
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const POST_DETAILS = 'POST_DETAILS'
 export const GET_POST_COMMENTS = 'GET_POST_COMMENTS'
+export const NEW_COMMENT = 'NEW_COMMENT'
 export const NEW_POST = 'NEW_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const DELETE_POST = 'DELETE_POST'
@@ -44,5 +45,12 @@ export function deletePostAction(post) {
     return {
         type: DELETE_POST,
         post,
+    }
+}
+
+export function newComment(comment){
+    return{
+        type: NEW_COMMENT,
+        comment,
     }
 }

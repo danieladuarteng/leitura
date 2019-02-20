@@ -5,6 +5,7 @@ import {
     createPost,
     editPost,
     deletePost,
+    createComment,
 } from '../LeituraAPI'
 
 import {
@@ -14,6 +15,7 @@ import {
     newPost,
     editPostAction,
     deletePostAction,
+    newComment,
 } from './posts'
 
 import { showLoading, hideLoading } from 'react-redux-loading'
@@ -68,6 +70,22 @@ export function addPost(post) {
             .then(resp => dispatch(newPost(resp)))
             .catch(e => {
                 console.warn('Error in createPost: ', e)
+            })
+    }
+}
+
+export function AddComment(parentId, content) {
+    const commentContent = {
+        timestamp: content.timestamp,
+        body: content.body,
+        author: content.author,
+    }
+
+    return dispatch => {
+        return createComment(parentId, commentContent)
+            .then(resp => dispatch(newComment(resp)))
+            .catch(e => {
+                console.warn('Error in createComment: ', e)
             })
     }
 }
