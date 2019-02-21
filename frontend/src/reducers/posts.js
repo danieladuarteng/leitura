@@ -1,7 +1,7 @@
 import { RECEIVE_POSTS, NEW_POST, DELETE_POST } from "../actions/posts";
 import { object } from "prop-types";
 
-export default function posts(state = [], action) {
+export default function posts(state = {}, action) {
     switch (action.type) {
         case RECEIVE_POSTS:
             return action.posts

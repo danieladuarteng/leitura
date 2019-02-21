@@ -1,6 +1,6 @@
 import { POST_DETAILS, GET_POST_COMMENTS, EDIT_POST } from "../actions/posts";
 
-export default function post(state = [], action) {
+export default function post(state = {}, action) {
     switch (action.type) {
         case POST_DETAILS:
             return {
