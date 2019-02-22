@@ -20,26 +20,21 @@ import {
     toggleVoteScore
 } from './posts'
 
-import { showLoading, hideLoading } from 'react-redux-loading'
 
 export function handleInitialData() {
     return (dispatch) => {
-        dispatch(showLoading())
         return getAllPosts()
             .then((posts) => {
                 dispatch(receivePosts(posts))
-                dispatch(hideLoading())
             })
     }
 }
 
 export function postDetails(id) {
     return (dispatch) => {
-        dispatch(showLoading())
         return getPostDetails(id)
             .then(post => {
                 dispatch(receivePostDetails(post))
-                dispatch(hideLoading())
                 return post;
             })
     }
