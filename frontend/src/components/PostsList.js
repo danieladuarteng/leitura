@@ -30,14 +30,15 @@ class PostsList extends Component {
             body,
             voteScore,
         } = this.props.post;
-        console.log(this.props)
+
         return (
             <div className="post1">
 
                 <Link to={`/${category}/${id}`}><h1>{title}</h1></Link>
+                
                 <div className="cabecalho">
-                    <div className="box-1"><a href="blog/ti-para-todos/">{category}</a></div>
-                    <div className="box-2"><a href="sobre-mim">{author}</a></div>
+                    <div className="box-1">{category}</div>
+                    <div className="box-2">{author}</div>
                     <div className="box-3">{moment(timestamp).format('DD/MM/YYYY')}</div>
                     <div className="box-4"></div>
                     <div className="contador">{commentCount} comments</div>
@@ -49,13 +50,13 @@ class PostsList extends Component {
 
                 <Link to={`/${category}/${id}`}>
                     <div className="botaoEnviar">CONTINUE LENDO</div>
-                    <div className="icons-post">
-                        <div className="like-post" onClick={e => this.handleLike(e, true)}></div>
-                        <div className="like-post-text">{voteScore}</div>
-                        <div className="deslike-post" onClick={e => this.handleLike(e, false)}></div>
-                    </div>
                 </Link>
 
+                <div className="icons-post">
+                    <div className="like-post" onClick={e => this.handleLike(e, true)}></div>
+                    <div className="like-post-text">{voteScore}</div>
+                    <div className="deslike-post" onClick={e => this.handleLike(e, false)}></div>
+                </div>
             </div>
         )
     }
