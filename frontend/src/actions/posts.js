@@ -5,6 +5,7 @@ export const NEW_COMMENT = 'NEW_COMMENT'
 export const NEW_POST = 'NEW_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const DELETE_POST = 'DELETE_POST'
+export const TOGGLE_VOTE_SCORE = 'TOGGLE_VOTE_SCORE'
 
 export function receivePosts(posts) {
     return {
@@ -48,9 +49,17 @@ export function deletePostAction(post) {
     }
 }
 
-export function newComment(comment){
-    return{
+export function newComment(comment) {
+    return {
         type: NEW_COMMENT,
         comment,
     }
+}
+
+export function toggleVoteScore(voteScore) {
+    return {
+        type: TOGGLE_VOTE_SCORE,
+        voteScore,
+    }
+
 }

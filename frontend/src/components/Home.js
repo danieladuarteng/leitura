@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import * as LeituraAPI from './LeituraAPI'
+import * as LeituraAPI from '../LeituraAPI'
 import Button from '@material-ui/core/Button';
 import PostsList from './PostsList';
 import _ from 'underscore';
 import moment from 'moment'
 import { connect } from 'react-redux'
-import { handleInitialData } from './actions/shared'
-
-import './App.css';
 
 const categoriesList = [
   {
@@ -36,13 +33,8 @@ const categoriesList = [
 class Home extends Component {
   state = {
     categorySelected: 'all',
-    sort: '!voteScore',
+    sort: 'voteScore',
   }
-
-  componentDidMount() {
-    this.props.dispatch(handleInitialData())
-  }
-
 
   onClick = async (categorySelected) => {
     if (categorySelected !== 'all') {
@@ -58,10 +50,8 @@ class Home extends Component {
   }
 
   render() {
-    const { posts } = this.props;
+    const { renderForVoteScore, renderForTimestamp } = this.props;
     const { categorySelected, sort } = this.state;
-
-    const postsRender = _.sortBy(posts, sort);
 
     return (
       <div>
@@ -71,35 +61,20 @@ class Home extends Component {
 
         <div className="grid-posts">
           <div className="grid-posts-item1">
-            {
-              categorySelected === 'all' ?
-                postsRender.map(post => (
-                  <PostsList
-                    key={post.id}
-                    id={post.id}
-                    title={post.title}
-                    category={post.category}
-                    author={post.author}
-                    timestamp={moment(post.timestamp).format('DD/MM/YYYY')}
-                    commentCount={post.commentCount}
-                    body={post.body}
-                    voteScore={post.voteScore}
-                  />
-                ))
-                :
-                postsRender.filter(a => a.category === categorySelected).map(post => (
-                  <PostsList
-                    key={post.id}
-                    id={post.id}
-                    title={post.title}
-                    category={post.category}
-                    author={post.author}
-                    timestamp={moment(post.timestamp).format('DD/MM/YYYY')}
-                    commentCount={post.commentCount}
-                    body={post.body}
-                    voteScore={post.voteScore}
-                  />
-                ))
+            {sort === 'voteScore' ?
+              renderForVoteScore.map((id) => (
+                <PostsList
+                  id={id}
+                  key={id}
+                />
+              ))
+              :
+              renderForTimestamp.map((id) => (
+                <PostsList
+                  id={id}
+                  key={id}
+                />
+              ))
             }
           </div>
 
@@ -111,9 +86,8 @@ class Home extends Component {
             <div className="categories">
               <h1>SORT BY </h1>
               <select onChange={(e) => this.onSortBy(e)}>
-                <option value="!voteScore">Votes</option>
+                <option value="voteScore">Votes</option>
                 <option value="timestamp">Date</option>
-                <option value="!commentCount">Comments</option>
               </select>
             </div>
 
@@ -140,8 +114,12 @@ class Home extends Component {
 
 function mapStateToProps({ posts }) {
   return {
-    posts
+    posts,
+    renderForVoteScore: Object.keys(posts)
+      .sort((a, b) => posts[b].voteScore - posts[a].voteScore),
+    renderForTimestamp: Object.keys(posts)
+      .sort((a, b) => posts[b].timestamp - posts[a].timestamp),
   }
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(Home)

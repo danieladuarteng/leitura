@@ -5,7 +5,8 @@ import {
     createPost,
     editPost,
     deletePost,
-    createComment,
+    //createComment,
+    voteScorePost,
 } from '../LeituraAPI'
 
 import {
@@ -16,6 +17,7 @@ import {
     editPostAction,
     deletePostAction,
     newComment,
+    toggleVoteScore
 } from './posts'
 
 import { showLoading, hideLoading } from 'react-redux-loading'
@@ -74,21 +76,21 @@ export function addPost(post) {
     }
 }
 
-export function AddComment(parentId, content) {
-    const commentContent = {
-        timestamp: content.timestamp,
-        body: content.body,
-        author: content.author,
-    }
+// export function AddComment(parentId, content) {
+//     const commentContent = {
+//         timestamp: content.timestamp,
+//         body: content.body,
+//         author: content.author,
+//     }
 
-    return dispatch => {
-        return createComment(parentId, commentContent)
-            .then(resp => dispatch(newComment(resp)))
-            .catch(e => {
-                console.warn('Error in createComment: ', e)
-            })
-    }
-}
+//     return dispatch => {
+//         return createComment(parentId, commentContent)
+//             .then(resp => dispatch(newComment(resp)))
+//             .catch(e => {
+//                 console.warn('Error in createComment: ', e)
+//             })
+//     }
+// }
 
 export function handleEditPost(id, edited) {
     return dispatch => {
@@ -110,5 +112,19 @@ export function handleDeletePost(id) {
             .catch(e => {
                 console.warn('Error in deletePost: ', e)
             })
+    }
+}
+
+export function voteScorePostAction(info){
+    return (dispatch) =>{
+        return voteScorePost(info)
+        .then(resp =>{
+            dispatch(toggleVoteScore(resp))
+        })
+        .catch((e) =>{
+            console.warn('Error in voteScorePost: ',e)
+            //dispatch(toggleVoteScore(info))
+            alert('The was an error liking or desliinking the post. Try again')
+        })
     }
 }

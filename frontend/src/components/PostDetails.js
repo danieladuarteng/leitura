@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
 import moment from 'moment';
-import { postDetails, postComments, handleDeletePost, handleInitialData } from './actions/shared'
+import { postDetails, postComments, handleDeletePost, handleInitialData } from '../actions/shared'
 import CommentsList from './CommentsList'
 import Button from '@material-ui/core/Button'
 

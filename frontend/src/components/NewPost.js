@@ -3,11 +3,9 @@ import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
-import { addPost } from './actions/shared'
+import { addPost } from '../actions/shared'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom';
-
-import './App.css';
 
 const styles = theme => ({
     container: {

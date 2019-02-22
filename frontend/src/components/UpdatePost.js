@@ -3,10 +3,8 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
-import { postDetails, handleEditPost } from './actions/shared'
+import { postDetails, handleEditPost } from '../actions/shared'
 import { Redirect } from 'react-router-dom';
-
-import './App.css';
 
 const styles = theme => ({
     container: {

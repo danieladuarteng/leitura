@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
 import Home from './Home'
 import UpdatePost from './UpdatePost'
-import { Route, HashRouter as Router, Switch } from "react-router-dom"
+import { Route, HashRouter as Router, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PostDetails from './PostDetails'
 import NewPost from './NewPost'
+import { handleInitialData } from '../actions/shared'
 
 import './App.css';
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.dispatch(handleInitialData())
+  }
 
   render() {
     return (
