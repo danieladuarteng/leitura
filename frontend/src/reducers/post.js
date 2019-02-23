@@ -1,4 +1,10 @@
-import { POST_DETAILS, GET_POST_COMMENTS, EDIT_POST } from "../actions/posts";
+import {
+    POST_DETAILS,
+    GET_POST_COMMENTS,
+    EDIT_POST,
+    NEW_COMMENT,
+    TOGGLE_VOTE_SCORE,
+} from "../actions/posts";
 
 export default function post(state = {}, action) {
     switch (action.type) {
@@ -18,10 +24,26 @@ export default function post(state = {}, action) {
                 ]
             }
         case EDIT_POST:
-        return{
-            ...state,
-            ...action.post,
-        }
+            return {
+                ...state,
+                ...action.post,
+            }
+        case NEW_COMMENT:
+            const { comment } = action
+            return {
+                ...state,
+                commentCount: state.commentCount + 1,
+                comments: state.comment.push(action.comment)
+            }
+        case TOGGLE_VOTE_SCORE:
+            const { post } = action
+            return {
+                ...state,//retorno os posts antigos
+                [post.id]: {
+                    ...state[post.id],
+                    voteScore: action.vote === 'downVote' ? post.voteScore - 1 : post.voteScore + 1
+                }
+            }
         default:
             return state
     }
