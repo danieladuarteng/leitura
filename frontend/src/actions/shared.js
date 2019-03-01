@@ -6,7 +6,7 @@ import {
     editPost,
     deletePost,
     //createComment,
-    voteScorePost,
+    //voteScorePost,
 } from '../LeituraAPI'
 
 import {
@@ -112,14 +112,14 @@ export function handleDeletePost(id) {
 
 export function voteScorePostAction(info){
     return (dispatch) =>{
-        return voteScorePost(info)
-        .then(resp =>{
-            dispatch(toggleVoteScore(resp))
-        })
-        .catch((e) =>{
-            console.warn('Error in voteScorePost: ',e)
-            //dispatch(toggleVoteScore(info))
-            alert('The was an error liking or desliinking the post. Try again')
-        })
+        // //return voteScorePost(info)
+        // .then(resp =>{
+        //     dispatch(toggleVoteScore(resp))
+        // })
+        // .catch((e) =>{
+        //     console.warn('Error in voteScorePost: ',e)
+        //     //dispatch(toggleVoteScore(info))
+        //     alert('The was an error liking or desliinking the post. Try again')
+        // })
     }
 }

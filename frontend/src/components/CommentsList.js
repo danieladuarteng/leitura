@@ -8,9 +8,11 @@ import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
 import { addPost } from '../actions/shared'
 import { Redirect } from 'react-router-dom';
-import { postDetails, postComments,
+import {
+    postDetails, postComments,
     // AddComment, 
-    handleInitialData } from '../actions/shared'
+    handleInitialData
+} from '../actions/shared'
 
 const styles = theme => ({
     container: {
@@ -66,8 +68,8 @@ class CommentsList extends Component {
         e.preventDefault();
         const { dispatch } = this.props
         const { parentId } = this.props.id
-       // dispatch(AddComment(parentId, this.state.comment))
-       //     .then(() => dispatch(postComments(parentId)))
+        // dispatch(AddComment(parentId, this.state.comment))
+        //     .then(() => dispatch(postComments(parentId)))
     }
 
     render() {
@@ -86,8 +88,11 @@ class CommentsList extends Component {
                         <TextField
                             required
                             id="author"
-                            value={author || 'Write your name'}
-                            placeholder="Author"
+                            value={author}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            placeholder="Write your name"
                             label="Author"
                             type="text"
                             onChange={this.handleChange('author')}
@@ -98,6 +103,10 @@ class CommentsList extends Component {
                             required
                             id="body"
                             value={body}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            placeholder="Write your comment"
                             label="Body"
                             type="text"
                             onChange={this.handleChange('body')}
