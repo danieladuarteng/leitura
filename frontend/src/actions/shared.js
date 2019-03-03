@@ -6,7 +6,7 @@ import {
     editPost,
     deletePost,
     //createComment,
-    voteScorePost,
+    //voteScorePost,
 } from '../LeituraAPI'
 
 import {
@@ -110,6 +110,7 @@ export function handleDeletePost(id) {
     }
 }
 
+<<<<<<< HEAD
 export function voteScorePostAction(id, vote) {
     return (dispatch) => {
         return voteScorePost(id, vote)
@@ -119,5 +120,18 @@ export function voteScorePostAction(id, vote) {
         .catch ((e) => {
             console.warn('Error in voteScorePost: ', e)
         })
+=======
+export function voteScorePostAction(info){
+    return (dispatch) =>{
+        // //return voteScorePost(info)
+        // .then(resp =>{
+        //     dispatch(toggleVoteScore(resp))
+        // })
+        // .catch((e) =>{
+        //     console.warn('Error in voteScorePost: ',e)
+        //     //dispatch(toggleVoteScore(info))
+        //     alert('The was an error liking or desliinking the post. Try again')
+        // })
+>>>>>>> fd037b966234b9abef90fb0464e0da66edda9871
     }
 }

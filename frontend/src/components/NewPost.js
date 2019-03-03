@@ -104,14 +104,16 @@ class NewPost extends Component {
                                 <TextField
                                     required
                                     id="title"
-                                    value={title || ''}
-                                    placeholder="Title"
+                                    value={title}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    placeholder="Input the title of post"
                                     label="Title"
                                     type="text"
                                     onChange={this.handleChange('title')}
                                     margin="normal"
                                     fullWidth
-                                    helperText="Input the title of post"
                                 />
                                 <TextField
                                     required
@@ -142,20 +144,23 @@ class NewPost extends Component {
                                 <TextField
                                     required
                                     id="author"
-                                    value={author || ''}
-                                    placeholder="Author"
+                                    value={author}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    placeholder="Input the author of post"
                                     label="Author"
                                     type="text"
                                     onChange={this.handleChange('author')}
                                     margin="normal"
                                     fullWidth
-                                    helperText="Input the author of post"
                                 />
 
                                 <TextField
                                     required
                                     id="body"
-                                    value={body || ''}
+                                    value={body}
+                                    placeholder="Input the content of post"
                                     label="Body"
                                     type="text"
                                     onChange={this.handleChange('body')}
