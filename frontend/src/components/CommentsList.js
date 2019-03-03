@@ -73,7 +73,6 @@ class CommentsList extends Component {
     render() {
         const { classes, commentCount } = this.props
         const { body, author } = this.state.comment
-        console.log(this.props)
         return (
             <div className="comments">
                 <p>{commentCount} comments</p>

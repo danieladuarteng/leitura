@@ -6,17 +6,16 @@ import moment from 'moment';
 
 class PostsList extends Component {
 
-    handleLike = (e, hasliked) => {
+    state = {
+        upvote: 'upVote',
+        downvote: 'downVote',
+    }
 
-        e.preventDefault()
+    handleLike = (id, vote) => {
 
-        const { dispatch, post } = this.props
+        const { dispatch } = this.props
 
-        dispatch(voteScorePostAction({
-            id: post.id,
-            voteScore: hasliked
-
-        }))
+        dispatch(voteScorePostAction(id, vote))
     }
 
     render() {
@@ -31,6 +30,7 @@ class PostsList extends Component {
             voteScore,
         } = this.props.post;
 
+        const {upvote, downvote} = this.state
         return (
             <div className="post1">
 
@@ -53,9 +53,9 @@ class PostsList extends Component {
                 </Link>
 
                 <div className="icons-post">
-                    <div className="like-post" onClick={e => this.handleLike(e, true)}></div>
+                    <div className="like-post" onClick={()=> this.handleLike(id, upvote)}></div>
                     <div className="like-post-text">{voteScore}</div>
-                    <div className="deslike-post" onClick={e => this.handleLike(e, false)}></div>
+                    <div className="deslike-post" onClick={()=> this.handleLike(id, downvote)}></div>
                 </div>
             </div>
         )

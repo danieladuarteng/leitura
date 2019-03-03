@@ -110,16 +110,14 @@ export function handleDeletePost(id) {
     }
 }
 
-export function voteScorePostAction(info){
-    return (dispatch) =>{
-        return voteScorePost(info)
+export function voteScorePostAction(id, vote) {
+    return (dispatch) => {
+        return voteScorePost(id, vote)
         .then(resp =>{
-            dispatch(toggleVoteScore(resp))
+            dispatch(toggleVoteScore(resp, vote))
         })
-        .catch((e) =>{
-            console.warn('Error in voteScorePost: ',e)
-            //dispatch(toggleVoteScore(info))
-            alert('The was an error liking or desliinking the post. Try again')
+        .catch ((e) => {
+            console.warn('Error in voteScorePost: ', e)
         })
     }
 }

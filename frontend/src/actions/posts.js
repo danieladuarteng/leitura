@@ -56,10 +56,10 @@ export function newComment(comment) {
     }
 }
 
-export function toggleVoteScore(voteScore) {
+export function toggleVoteScore(post, vote) {
     return {
         type: TOGGLE_VOTE_SCORE,
-        voteScore,
+        post,
+        vote
     }
-
 }
