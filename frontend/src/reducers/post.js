@@ -27,12 +27,11 @@ export default function post(state = {}, action) {
             const postId = Object.keys(state).filter(item => 
                 state[item].id === action.post.id)
                 
-
                 return {
                     ...state,
                     [postId]:{
                         ...state[postId],
-                        post: state.post
+                        post: action.post
                     }
                     
                 }
