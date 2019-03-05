@@ -15,19 +15,24 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(handleInitialData())
-    this.props.dispatch(handleGetAllCategories())
-
+    const { dispatch } = this.props
+    dispatch(handleInitialData())
+    dispatch(handleGetAllCategories())
   }
 
   onClick = (categorySelected) => {
+    const { history, dispatch } = this.props
+
     if (categorySelected !== 'all') {
-      this.props.dispatch(handlePostsForCategory(categorySelected))
+      dispatch(handlePostsForCategory(categorySelected))
+        .then(history.push(`${categorySelected}`))
     }
     else {
-      this.props.dispatch(handleInitialData())
+      dispatch(handleInitialData())
+        .then(history.push(""))
     }
     this.setState({ categorySelected })
+    
   }
 
   onSortBy = (e) => {
