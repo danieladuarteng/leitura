@@ -5,6 +5,8 @@ import {
     createPost,
     editPost,
     deletePost,
+    getAllCategories,
+    getPostsForCategories,
     //createComment,
     //voteScorePost,
 } from '../LeituraAPI'
@@ -16,6 +18,8 @@ import {
     newPost,
     editPostAction,
     deletePostAction,
+    getCategories,
+    getPostsForCategory,
     newComment,
     toggleVoteScore
 } from './posts'
@@ -26,6 +30,24 @@ export function handleInitialData() {
         return getAllPosts()
             .then((posts) => {
                 dispatch(receivePosts(posts))
+            })
+    }
+}
+
+export function handleGetAllCategories() {
+    return dispatch => {
+        return getAllCategories()
+            .then((result) => {
+                dispatch(getCategories(result.categories));
+            })
+    }
+}
+
+export function handlePostsForCategory(category) {
+    return dispatch => {
+        return getPostsForCategories(category)
+            .then((result) => {
+                dispatch(getPostsForCategory(result))
             })
     }
 }
@@ -110,8 +132,8 @@ export function handleDeletePost(id) {
     }
 }
 
-export function voteScorePostAction(info){
-    return (dispatch) =>{
+export function voteScorePostAction(info) {
+    return (dispatch) => {
         // //return voteScorePost(info)
         // .then(resp =>{
         //     dispatch(toggleVoteScore(resp))

@@ -6,30 +6,7 @@ import PostsList from './PostsList';
 import _ from 'underscore';
 import moment from 'moment'
 import { connect } from 'react-redux'
-import { handleInitialData } from '../actions/shared'
-
-const categoriesList = [
-  {
-    id: 0,
-    title: 'All Categories',
-    category: 'all',
-  },
-  {
-    id: 1,
-    title: 'React',
-    category: 'react',
-  },
-  {
-    id: 2,
-    title: 'Redux',
-    category: 'redux',
-  },
-  {
-    id: 3,
-    title: 'Udacity',
-    category: 'udacity',
-  },
-];
+import { handleInitialData, handleGetAllCategories, handlePostsForCategory } from '../actions/shared'
 
 class Home extends Component {
   state = {
@@ -39,11 +16,16 @@ class Home extends Component {
 
   componentDidMount() {
     this.props.dispatch(handleInitialData())
+    this.props.dispatch(handleGetAllCategories())
+
   }
 
-  onClick = async (categorySelected) => {
+  onClick = (categorySelected) => {
     if (categorySelected !== 'all') {
-      await LeituraAPI.getPostsForCategories(categorySelected)
+      this.props.dispatch(handlePostsForCategory(categorySelected))
+    }
+    else {
+      this.props.dispatch(handleInitialData())
     }
     this.setState({ categorySelected })
   }
@@ -55,8 +37,10 @@ class Home extends Component {
   }
 
   render() {
-    const { renderForVoteScore, renderForTimestamp } = this.props;
+    const { renderForVoteScore, renderForTimestamp, categories } = this.props;
     const { categorySelected, sort } = this.state;
+
+    console.log(this.props)
 
     return (
       <div>
@@ -99,12 +83,19 @@ class Home extends Component {
             <div className="atualizacoes">
               <h1>CATEGORIES</h1>
               <ul>
-                {categoriesList.map(item => (
-                  <li key={item.id}>
+                <li>
+                  <Button
+                    onClick={() => { this.onClick('all'); }}
+                  >
+                    All categories
+                  </Button>
+                </li>
+                {categories.map(category => (
+                  <li key={category}>
                     <Button
-                      onClick={() => { this.onClick(item.category); }}
+                      onClick={() => { this.onClick(category); }}
                     >
-                      {item.title}
+                      {category}
                     </Button>
                   </li>
                 ))}
@@ -117,13 +108,14 @@ class Home extends Component {
   }
 }
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ posts, categories }) {
   return {
     posts,
     renderForVoteScore: Object.keys(posts)
       .sort((a, b) => posts[b].voteScore - posts[a].voteScore),
     renderForTimestamp: Object.keys(posts)
       .sort((a, b) => posts[b].timestamp - posts[a].timestamp),
+    categories: Object.values(categories).map(category => category.name)
   }
 }
 

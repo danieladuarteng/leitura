@@ -1,5 +1,4 @@
-import { RECEIVE_POSTS, NEW_POST, DELETE_POST } from "../actions/posts";
-import { object } from "prop-types";
+import { RECEIVE_POSTS, NEW_POST, DELETE_POST, GET_POSTS_FOR_CATEGORY } from "../actions/posts";
 
 export default function posts(state = {}, action) {
     switch (action.type) {
@@ -20,6 +19,10 @@ export default function posts(state = {}, action) {
                     ...state[postId],
                     deleted: true
                 }
+            }
+        case GET_POSTS_FOR_CATEGORY:
+            return {
+                ...action.posts,
             }
         // const deletedKey = Object.keys(state).find(key => (
         //     state[key].id === action.post.id

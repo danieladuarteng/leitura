@@ -6,6 +6,8 @@ export const NEW_POST = 'NEW_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const TOGGLE_VOTE_SCORE = 'TOGGLE_VOTE_SCORE'
+export const GET_CATEGORIES = 'GET_CATEGORIES'
+export const GET_POSTS_FOR_CATEGORY = 'GET_POSTS_FOR_CATEGORY'
 
 export function receivePosts(posts) {
     return {
@@ -63,3 +65,18 @@ export function toggleVoteScore(post, vote) {
         vote
     }
 }
+
+export function getCategories(categories) {
+    return {
+        type: GET_CATEGORIES,
+        categories,
+    }
+}
+
+export function getPostsForCategory(posts){
+    return{
+        type: GET_POSTS_FOR_CATEGORY,
+        posts,
+    }
+}
+
