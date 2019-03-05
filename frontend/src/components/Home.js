@@ -6,6 +6,7 @@ import PostsList from './PostsList';
 import _ from 'underscore';
 import moment from 'moment'
 import { connect } from 'react-redux'
+import { handleInitialData } from '../actions/shared'
 
 const categoriesList = [
   {
@@ -34,6 +35,10 @@ class Home extends Component {
   state = {
     categorySelected: 'all',
     sort: 'voteScore',
+  }
+
+  componentDidMount() {
+    this.props.dispatch(handleInitialData())
   }
 
   onClick = async (categorySelected) => {

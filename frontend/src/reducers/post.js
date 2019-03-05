@@ -24,19 +24,9 @@ export default function post(state = {}, action) {
                 ]
             }
         case EDIT_POST:
-            const postId = Object.keys(state).filter(item => 
-                state[item].id === action.post.id)
-                
-                return {
-                    ...state,
-                    [postId]:{
-                        ...state[postId],
-                        post: action.post
-                    }
-                    
-                }
+            return action.post
+               
             
-
         // case NEW_COMMENT:
         //     const { comment } = action
         //     return {

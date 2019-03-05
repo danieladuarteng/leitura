@@ -10,11 +10,6 @@ import { handleInitialData } from '../actions/shared'
 import './App.css';
 
 class App extends Component {
-
-  componentDidMount() {
-    this.props.dispatch(handleInitialData())
-  }
-
   render() {
 
     return (

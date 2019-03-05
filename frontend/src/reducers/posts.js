@@ -12,18 +12,27 @@ export default function posts(state = {}, action) {
                 [action.post.id]: action.post,
             }
         case DELETE_POST:
-            const deletedKey = Object.keys(state).find(key => (
-                state[key].id === action.post.id
-            ))
-            const newList = Object.keys(state).reduce((object, key) => {
-                if (key !== deletedKey) {
-                    object[key] = state[key]
-                }
-                return object
-            }, {})
+            const postId = Object.keys(state).filter(item =>
+                state[item].id === action.post.id)
             return {
-                ...newList
+                ...state,
+                [postId]: {
+                    ...state[postId],
+                    deleted: true
+                }
             }
+        // const deletedKey = Object.keys(state).find(key => (
+        //     state[key].id === action.post.id
+        // ))
+        // const newList = Object.keys(state).reduce((object, key) => {
+        //     if (key !== deletedKey) {
+        //         object[key] = state[key]
+        //     }
+        //     return object
+        // }, {})
+        // return {
+        //     ...newList
+        // }
         default:
             return state
     }
