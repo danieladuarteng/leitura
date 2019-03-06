@@ -8,7 +8,7 @@ import {
     getAllCategories,
     getPostsForCategories,
     //createComment,
-    //voteScorePost,
+    voteScorePost,
 } from '../LeituraAPI'
 
 import {
@@ -132,16 +132,17 @@ export function handleDeletePost(id) {
     }
 }
 
-export function voteScorePostAction(info) {
+export function voteScorePostAction(id, vote) {
     return (dispatch) => {
-        // //return voteScorePost(info)
-        // .then(resp =>{
-        //     dispatch(toggleVoteScore(resp))
-        // })
-        // .catch((e) =>{
-        //     console.warn('Error in voteScorePost: ',e)
-        //     //dispatch(toggleVoteScore(info))
-        //     alert('The was an error liking or desliinking the post. Try again')
-        // })
+        return voteScorePost(id, vote)
+        .then(resp =>{
+            dispatch(toggleVoteScore(resp, vote))
+            console.log(resp)
+        })
+        .catch((e) =>{
+            console.warn('Error in voteScorePost: ',e)
+            //dispatch(toggleVoteScore(info))
+            alert('The was an error liking or desliinking the post. Try again')
+        })
     }
 }

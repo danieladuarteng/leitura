@@ -112,7 +112,7 @@ export const voteScorePost = (id, vote) =>
         method: 'POST',
         headers,
         body: JSON.stringify({
-            voteScore: vote,
+            option: vote,
         })
     }).then(res => res.json())
         .then(data => {

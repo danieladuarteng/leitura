@@ -25,8 +25,8 @@ export default function post(state = {}, action) {
             }
         case EDIT_POST:
             return action.post
-               
-            
+
+
         // case NEW_COMMENT:
         //     const { comment } = action
         //     return {
@@ -34,15 +34,14 @@ export default function post(state = {}, action) {
         //         commentCount: state.commentCount + 1,
         //         comments: state.comment.push(action.comment)
         //     }
-        // case TOGGLE_VOTE_SCORE:
-        //     const { post } = action
-        //     return {
-        //         ...state,//retorno os posts antigos
-        //         [post.id]: {
-        //             ...state[post.id],
-        //             voteScore: action.vote === 'downVote' ? post.voteScore - 1 : post.voteScore + 1
-        //         }
-        //     }
+        case TOGGLE_VOTE_SCORE:
+            //const { post } = action
+            return {
+                ...state,//retorno os posts antigos
+
+                voteScore: action.post.voteScore
+
+            }
         default:
             return state
     }
