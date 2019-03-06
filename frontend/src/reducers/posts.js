@@ -1,11 +1,10 @@
-import { RECEIVE_POSTS, NEW_POST, DELETE_POST, GET_POSTS_FOR_CATEGORY } from "../actions/posts";
+import { RECEIVE_POSTS, NEW_POST, DELETE_POST, GET_POSTS_FOR_CATEGORY, TOGGLE_VOTE_SCORE } from "../actions/posts";
 
 export default function posts(state = {}, action) {
     switch (action.type) {
         case RECEIVE_POSTS:
             return action.posts
         case NEW_POST:
-            const post = action
             return {
                 ...state,
                 [action.post.id]: action.post,
@@ -23,6 +22,16 @@ export default function posts(state = {}, action) {
         case GET_POSTS_FOR_CATEGORY:
             return {
                 ...action.posts,
+            }
+        case TOGGLE_VOTE_SCORE:
+            const postVotedId = Object.keys(state).filter(item =>
+                state[item].id === action.post.id)
+            return {
+                ...state,
+                [postVotedId]: {
+                    ...state[postVotedId],
+                    voteScore: action.post.voteScore
+                }
             }
         // const deletedKey = Object.keys(state).find(key => (
         //     state[key].id === action.post.id

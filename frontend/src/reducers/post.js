@@ -35,12 +35,9 @@ export default function post(state = {}, action) {
         //         comments: state.comment.push(action.comment)
         //     }
         case TOGGLE_VOTE_SCORE:
-            //const { post } = action
             return {
-                ...state,//retorno os posts antigos
-
-                voteScore: action.post.voteScore
-
+                ...state,
+                voteScore: action.post.voteScore,
             }
         default:
             return state
