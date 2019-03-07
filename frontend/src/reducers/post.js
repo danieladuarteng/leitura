@@ -43,14 +43,17 @@ export default function post(state = {}, action) {
         case EDIT_COMMENT:
             return action.comment
         case DELETE_COMMENT:
-            const commentId = Object.keys(state).filter(item =>
-                state[item].id === action.comment.id)
+            const { comments } = state;
+            let newComments = comments;
+
+            newComments.splice(
+                comments.findIndex(item => item.id === action.comment.id), 1
+            );
+
             return {
                 ...state,
-                [commentId]: {
-                    ...state[commentId],
-                    deleted: true
-                }
+                commentCount: state.commentCount - 1,
+                comments: newComments,
             }
         default:
             return state
