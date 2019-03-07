@@ -1,13 +1,18 @@
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const POST_DETAILS = 'POST_DETAILS'
-export const GET_POST_COMMENTS = 'GET_POST_COMMENTS'
-export const NEW_COMMENT = 'NEW_COMMENT'
 export const NEW_POST = 'NEW_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const TOGGLE_VOTE_SCORE = 'TOGGLE_VOTE_SCORE'
+
+export const GET_POST_COMMENTS = 'GET_POST_COMMENTS'
+export const NEW_COMMENT = 'NEW_COMMENT'
+export const EDIT_COMMENT = 'EDIT_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
+
 export const GET_CATEGORIES = 'GET_CATEGORIES'
 export const GET_POSTS_FOR_CATEGORY = 'GET_POSTS_FOR_CATEGORY'
+
 
 export function receivePosts(posts) {
     return {
@@ -20,13 +25,6 @@ export function receivePostDetails(post) {
     return {
         type: POST_DETAILS,
         post: post
-    }
-}
-
-export function receivePostComments(comments) {
-    return {
-        type: GET_POST_COMMENTS,
-        comments,
     }
 }
 
@@ -51,6 +49,27 @@ export function deletePostAction(post) {
     }
 }
 
+export function deleteCommentAction(comment){
+    return{
+        type: DELETE_COMMENT,
+        comment,
+    }
+}
+
+export function toggleVoteScore(post) {
+    return {
+        type: TOGGLE_VOTE_SCORE,
+        post,
+    }
+}
+
+export function receivePostComments(comments) {
+    return {
+        type: GET_POST_COMMENTS,
+        comments,
+    }
+}
+
 export function newComment(comment) {
     return {
         type: NEW_COMMENT,
@@ -58,11 +77,10 @@ export function newComment(comment) {
     }
 }
 
-export function toggleVoteScore(post, vote) {
+export function editCommentAction(comment) {
     return {
-        type: TOGGLE_VOTE_SCORE,
-        post,
-        vote
+        type: EDIT_COMMENT,
+        comment,
     }
 }
 
@@ -73,8 +91,8 @@ export function getCategories(categories) {
     }
 }
 
-export function getPostsForCategory(posts){
-    return{
+export function getPostsForCategory(posts) {
+    return {
         type: GET_POSTS_FOR_CATEGORY,
         posts,
     }

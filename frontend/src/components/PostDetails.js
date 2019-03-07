@@ -64,7 +64,7 @@ class PostDetails extends Component {
                         />
                     </div>
                     <div className="item-sidebar">
-                        <Link to={`/update/${id}`}><div id="edit-post">EDIT</div></Link>
+                        <Link to={`/edit-post/${id}`}><div id="edit-post">EDIT</div></Link>
                         <Button
                             variant="contained"
                             color="secondary"

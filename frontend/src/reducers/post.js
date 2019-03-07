@@ -4,6 +4,8 @@ import {
     EDIT_POST,
     NEW_COMMENT,
     TOGGLE_VOTE_SCORE,
+    EDIT_COMMENT,
+    DELETE_COMMENT,
 } from "../actions/posts";
 
 export default function post(state = {}, action) {
@@ -37,6 +39,18 @@ export default function post(state = {}, action) {
                 ...state,
                 commentCount: state.commentCount + 1,
                 comments: state.comments.concat(action.comment)
+            }
+        case EDIT_COMMENT:
+            return action.comment
+        case DELETE_COMMENT:
+            const commentId = Object.keys(state).filter(item =>
+                state[item].id === action.comment.id)
+            return {
+                ...state,
+                [commentId]: {
+                    ...state[commentId],
+                    deleted: true
+                }
             }
         default:
             return state

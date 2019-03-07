@@ -9,6 +9,8 @@ import {
     getPostsForCategories,
     createComment,
     voteScorePost,
+    editComment,
+    deleteComment
 } from '../LeituraAPI'
 
 import {
@@ -21,7 +23,9 @@ import {
     getCategories,
     getPostsForCategory,
     newComment,
-    toggleVoteScore
+    toggleVoteScore,
+    editCommentAction,
+    deleteCommentAction
 } from './posts'
 
 
@@ -119,6 +123,16 @@ export function handleEditPost(id, edited) {
     }
 }
 
+export function handleEditComment(id, edited){
+    return dispatch =>{
+        return editComment(id, edited)
+        .then(resp => dispatch(editCommentAction(resp)))
+            .catch(e => {
+                console.warn('Error in editComment: ', e)
+            })
+    }
+}
+
 export function handleDeletePost(id) {
     return dispatch => {
         return deletePost(id)
@@ -131,11 +145,23 @@ export function handleDeletePost(id) {
     }
 }
 
+export function handleDeleteComment(id){
+    return dispatch =>{
+        return deleteComment(id)
+        .then(resp => {
+            dispatch(deleteCommentAction(resp))
+        })
+        .catch(e => {
+            console.warn('Error in deleteComment: ', e)
+        })
+}
+}
+
 export function voteScorePostAction(id, vote) {
     return (dispatch) => {
         return voteScorePost(id, vote)
             .then(resp => {
-                dispatch(toggleVoteScore(resp, vote))
+                dispatch(toggleVoteScore(resp))
                 console.log(resp)
             })
             .catch((e) => {

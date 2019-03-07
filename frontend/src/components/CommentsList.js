@@ -10,8 +10,9 @@ import { addPost } from '../actions/shared'
 import { Redirect } from 'react-router-dom';
 import {
     postDetails, postComments,
-    AddComment, 
-    handleInitialData
+    AddComment,
+    handleInitialData,
+    handleDeleteComment,
 } from '../actions/shared'
 
 const styles = theme => ({
@@ -71,6 +72,15 @@ class CommentsList extends Component {
         const { id } = this.props
         dispatch(AddComment(id, this.state.comment))
             .then(() => dispatch(postComments(id)))
+    }
+
+    handleEdit = (id) =>{
+        console.log(id,'comment')
+    }
+
+    handleDelete = (id) =>{
+        const {dispatch} = this.props
+        dispatch(handleDeleteComment(id))
     }
 
     render() {
@@ -138,12 +148,24 @@ class CommentsList extends Component {
                             {comment.body}
                         </div>
 
-                        <div className="edit-comment">
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            type="submit"
+                            className="edit-comment"
+                            onClick={() => this.handleEdit(comment.id)}
+                        >
                             EDIT
-                                </div>
-                        <div className="remove-comment">
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                            className="remove-comment"
+                            onClick={() => this.handleDelete(comment.id)}
+                        >
                             REMOVE
-                                </div>
+                        </Button>
                         <div className="controls">
                             <div className="like-comment"></div>
                             <div className="like-comment-text">{comment.voteScore}</div>

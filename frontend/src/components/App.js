@@ -18,7 +18,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
 
-          <Route path="/update/:id" component={UpdatePost} />
+          <Route path="/edit-post/:id" component={UpdatePost} />
 
           <Route path="/:category/:id" render={props => {
               console.log(props)

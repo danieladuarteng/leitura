@@ -158,6 +158,21 @@ export const editPost = (id, edited) =>
             return data
         })
 
+export const editComment = (id, bodyComment) =>
+    fetch(`${api}/comments/${id}`,{
+        method: 'PUT',
+        headers,
+        body: JSON.stringify({
+            body: bodyComment,
+        })
+    }).then(res => res.json())
+    .then(data => {
+        console.log("comment edited", bodyComment)
+        console.log(data)
+        return data
+    })
+
+
 export const deletePost = id =>
     fetch(`${api}/posts/${id}`, {
         method: 'DELETE',
@@ -165,6 +180,17 @@ export const deletePost = id =>
     }).then(res => res.json())
         .then(data => {
             console.log("post deleted", id)
+            console.log(data)
+            return data
+        })
+
+export const deleteComment = id =>
+    fetch(`${api}/comments/${id}`,{
+        method: 'DELETE',
+        headers,
+        }).then(res => res.json())
+        .then(data => {
+            console.log("comment deleted", id)
             console.log(data)
             return data
         })
