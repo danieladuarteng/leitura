@@ -72,6 +72,13 @@ class CommentsList extends Component {
         const { id } = this.props
         dispatch(AddComment(id, this.state.comment))
             .then(() => dispatch(postComments(id)))
+
+        this.setState({
+            comment: {
+                body: '',
+                author: '',
+            },
+        })
     }
 
     handleEdit = (id) =>{
