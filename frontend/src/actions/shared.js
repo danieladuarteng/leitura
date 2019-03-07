@@ -7,7 +7,7 @@ import {
     deletePost,
     getAllCategories,
     getPostsForCategories,
-    //createComment,
+    createComment,
     voteScorePost,
 } from '../LeituraAPI'
 
@@ -93,21 +93,21 @@ export function addPost(post) {
     }
 }
 
-// export function AddComment(parentId, content) {
-//     const commentContent = {
-//         timestamp: content.timestamp,
-//         body: content.body,
-//         author: content.author,
-//     }
+export function AddComment(parentId, content) {
+    const commentContent = {
+        timestamp: content.timestamp,
+        body: content.body,
+        author: content.author,
+    }
 
-//     return dispatch => {
-//         return createComment(parentId, commentContent)
-//             .then(resp => dispatch(newComment(resp)))
-//             .catch(e => {
-//                 console.warn('Error in createComment: ', e)
-//             })
-//     }
-// }
+    return dispatch => {
+        return createComment(parentId, commentContent)
+            .then(resp => dispatch(newComment(resp)))
+            .catch(e => {
+                console.warn('Error in createComment: ', e)
+            })
+    }
+}
 
 export function handleEditPost(id, edited) {
     return dispatch => {
@@ -118,7 +118,6 @@ export function handleEditPost(id, edited) {
             })
     }
 }
-
 
 export function handleDeletePost(id) {
     return dispatch => {
@@ -135,14 +134,13 @@ export function handleDeletePost(id) {
 export function voteScorePostAction(id, vote) {
     return (dispatch) => {
         return voteScorePost(id, vote)
-        .then(resp =>{
-            dispatch(toggleVoteScore(resp, vote))
-            console.log(resp)
-        })
-        .catch((e) =>{
-            console.warn('Error in voteScorePost: ',e)
-            //dispatch(toggleVoteScore(info))
-            alert('The was an error liking or desliinking the post. Try again')
-        })
+            .then(resp => {
+                dispatch(toggleVoteScore(resp, vote))
+                console.log(resp)
+            })
+            .catch((e) => {
+                console.warn('Error in voteScorePost: ', e)
+                alert('The was an error liking or deslinking the post. Try again')
+            })
     }
 }

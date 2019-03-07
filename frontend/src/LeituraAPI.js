@@ -124,24 +124,24 @@ export const voteScorePost = (id, vote) =>
 
 
 
-// export const createComment = (parentId, content) =>
-//     fetch(`${api}/comments`, {
-//         method: 'POST',
-//         headers,
-//         body: JSON.stringify({
-//             id: Math.random().toString(36).substr(-8),
-//             timestamp: content.timestamp,
-//             title: content.title,
-//             body: content.body,
-//             author: content.author,
-//             parentId,
-//         })
-//     }).then(res => res.json())
-//         .then(data => {
-//             console.log("novo comentário", content)
-//             console.log(data)
-//             return data
-//         })
+export const createComment = (parentId, content) =>
+    fetch(`${api}/comments`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+            id: Math.random().toString(36).substr(-8),
+            timestamp: content.timestamp,
+            title: content.title,
+            body: content.body,
+            author: content.author,
+            parentId,
+        })
+    }).then(res => res.json())
+        .then(data => {
+            console.log("novo comentário", content)
+            console.log(data)
+            return data
+        })
 
 export const editPost = (id, edited) =>
     fetch(`${api}/posts/${id}`, {

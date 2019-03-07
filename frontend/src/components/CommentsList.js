@@ -10,7 +10,7 @@ import { addPost } from '../actions/shared'
 import { Redirect } from 'react-router-dom';
 import {
     postDetails, postComments,
-    // AddComment, 
+    AddComment, 
     handleInitialData
 } from '../actions/shared'
 
@@ -31,6 +31,7 @@ const styles = theme => ({
         width: 200,
     },
 });
+
 class CommentsList extends Component {
 
     constructor() {
@@ -67,14 +68,15 @@ class CommentsList extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const { dispatch } = this.props
-        const { parentId } = this.props.id
-        // dispatch(AddComment(parentId, this.state.comment))
-        //     .then(() => dispatch(postComments(parentId)))
+        const { id } = this.props
+        dispatch(AddComment(id, this.state.comment))
+            .then(() => dispatch(postComments(id)))
     }
 
     render() {
         const { classes, commentCount } = this.props
         const { body, author } = this.state.comment
+        console.log(this.props)
         return (
             <div className="comments">
                 <p>{commentCount} comments</p>
@@ -155,11 +157,10 @@ class CommentsList extends Component {
 }
 
 function mapStateToProps({ post }, { id, commentCount }) {
-    const idPost = post[id]
     return {
         post,
-        idPost,
-        commentCount
+        commentCount,
+        id
     }
 }
 

@@ -26,18 +26,17 @@ export default function post(state = {}, action) {
         case EDIT_POST:
             return action.post
 
-
-        // case NEW_COMMENT:
-        //     const { comment } = action
-        //     return {
-        //         ...state,
-        //         commentCount: state.commentCount + 1,
-        //         comments: state.comment.push(action.comment)
-        //     }
         case TOGGLE_VOTE_SCORE:
             return {
                 ...state,
                 voteScore: action.post.voteScore,
+            }
+
+        case NEW_COMMENT:
+            return {
+                ...state,
+                commentCount: state.commentCount + 1,
+                comments: state.comments.concat(action.comment)
             }
         default:
             return state
