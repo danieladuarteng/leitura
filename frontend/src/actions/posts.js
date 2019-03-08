@@ -9,6 +9,7 @@ export const GET_POST_COMMENTS = 'GET_POST_COMMENTS'
 export const NEW_COMMENT = 'NEW_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const COMMENT_DETAILS = 'COMMENT_DETAILS'
 
 export const GET_CATEGORIES = 'GET_CATEGORIES'
 export const GET_POSTS_FOR_CATEGORY = 'GET_POSTS_FOR_CATEGORY'
@@ -17,14 +18,21 @@ export const GET_POSTS_FOR_CATEGORY = 'GET_POSTS_FOR_CATEGORY'
 export function receivePosts(posts) {
     return {
         type: RECEIVE_POSTS,
-        posts: posts
+        posts
     }
 }
 
 export function receivePostDetails(post) {
     return {
         type: POST_DETAILS,
-        post: post
+        post
+    }
+}
+
+export function receiveCommentDetails(comment) {
+    return {
+        type: COMMENT_DETAILS,
+        comment
     }
 }
 
@@ -49,8 +57,8 @@ export function deletePostAction(post) {
     }
 }
 
-export function deleteCommentAction(comment){
-    return{
+export function deleteCommentAction(comment) {
+    return {
         type: DELETE_COMMENT,
         comment,
     }

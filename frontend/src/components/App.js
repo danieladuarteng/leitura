@@ -9,6 +9,7 @@ import Page404 from './Page404'
 import { handleInitialData } from '../actions/shared'
 
 import './App.css';
+import UpdateComment from './UpdateComment';
 
 class App extends Component {
   render() {
@@ -20,6 +21,8 @@ class App extends Component {
 
           <Route path="/edit-post/:id" component={UpdatePost} />
 
+          <Route path="/edit-comment/:id" component={UpdateComment}/>
+          
           <Route path="/:category/:id" render={props => {
               console.log(props)
               return <PostDetails {...props} />

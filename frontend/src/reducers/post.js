@@ -6,6 +6,7 @@ import {
     TOGGLE_VOTE_SCORE,
     EDIT_COMMENT,
     DELETE_COMMENT,
+    COMMENT_DETAILS,
 } from "../actions/posts";
 
 export default function post(state = {}, action) {
@@ -14,6 +15,11 @@ export default function post(state = {}, action) {
             return {
                 ...state,
                 ...action.post
+            }
+        case COMMENT_DETAILS:
+            return {
+                ...state,
+                ...action.comment
             }
         case GET_POST_COMMENTS:
             const orderVote = action.comments.sort((a, b) => {
@@ -41,7 +47,13 @@ export default function post(state = {}, action) {
                 comments: state.comments.concat(action.comment)
             }
         case EDIT_COMMENT:
-            return action.comment
+            const commentsList = state.comments.map(item => (
+                item.id === action.comment.id ? action.comment : item
+            ));
+            return {
+                ...state,
+                comments: commentsList,
+            }
         case DELETE_COMMENT:
             const { comments } = state;
             let newComments = comments;

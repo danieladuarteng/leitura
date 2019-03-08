@@ -68,6 +68,22 @@ export const getPostDetails = (postId) =>
             return error
         })
 
+export const getCommentsDetails = (commentId) =>
+    fetch(`${api}/comments/${commentId}`, {
+        method: 'get',
+        headers
+    })
+        .then(res => res.json())
+        .then(data => {
+            console.log("comentário com detalhes", commentId)
+            console.log(data)
+            return data
+        })
+        .catch(error => {
+            console.log(error)
+            return error
+        })
+
 export const getPostComments = (postId) =>
     fetch(`${api}/posts/${postId}/comments`, {
         method: 'get',
@@ -107,8 +123,8 @@ export const createPost = (post) =>
         })
 
 
-export const voteScorePost = (id, vote) => 
-    fetch(`${api}/posts/${id}`,{
+export const voteScorePost = (id, vote) =>
+    fetch(`${api}/posts/${id}`, {
         method: 'POST',
         headers,
         body: JSON.stringify({
@@ -159,18 +175,18 @@ export const editPost = (id, edited) =>
         })
 
 export const editComment = (id, bodyComment) =>
-    fetch(`${api}/comments/${id}`,{
+    fetch(`${api}/comments/${id}`, {
         method: 'PUT',
         headers,
         body: JSON.stringify({
-            body: bodyComment,
+            body: bodyComment.body,
         })
     }).then(res => res.json())
-    .then(data => {
-        console.log("comment edited", bodyComment)
-        console.log(data)
-        return data
-    })
+        .then(data => {
+            console.log("comment edited", bodyComment)
+            console.log(data)
+            return data
+        })
 
 
 export const deletePost = id =>
@@ -185,10 +201,10 @@ export const deletePost = id =>
         })
 
 export const deleteComment = id =>
-    fetch(`${api}/comments/${id}`,{
+    fetch(`${api}/comments/${id}`, {
         method: 'DELETE',
         headers,
-        }).then(res => res.json())
+    }).then(res => res.json())
         .then(data => {
             console.log("comment deleted", id)
             console.log(data)

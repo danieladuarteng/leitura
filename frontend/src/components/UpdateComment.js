@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
-import { postDetails, handleEditPost } from '../actions/shared'
+import { commentDetails, handleEditComment } from '../actions/shared'
 import { Redirect } from 'react-router-dom';
 
 const styles = theme => ({
@@ -27,28 +27,22 @@ const styles = theme => ({
 class UpdateComment extends Component {
 
     state = {
-        postEdited: {
-            title: '',
+        commentEdited: {
             body: '',
         },
         toHome: false,
     };
 
     componentDidMount() {
-        this.props.dispatch(postDetails(this.props.match.params.id)).then(mydata => {
-            this.setState({
-                postEdited: {
-                    title: mydata.title,
-                    body: mydata.body,
-                },
-            })
-        });
+        const commentId = this.props.dispatch(commentDetails(this.props.post.id))
+        console.log(commentId)
+     
     }
 
     handleChange = name => event => {
         this.setState({
-            postEdited: {
-                ...this.state.postEdited,
+            commentEdited: {
+                ...this.state.commentEdited,
                 [name]: event.target.value,
             }
         })
@@ -57,18 +51,20 @@ class UpdateComment extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const { dispatch } = this.props
-        dispatch(handleEditPost(this.props.match.params.id, this.state.postEdited))
+        dispatch(handleEditComment(this.props.match.params.id, this.state.commentEdited))
 
         this.setState({ toHome: true })
     }
     render() {
         const { classes } = this.props;
-        const { title, body } = this.state.postEdited
+        const { title, body } = this.state.commentEdited
         const { toHome } = this.state
 
-        if (toHome === true) {
-            return <Redirect to='/:category/:id' />
-        }
+        console.log(this.props)
+
+        // if (toHome === true) {
+        //     return <Redirect to='/:category/:id' />
+        // }
 
         return (
             <div>
@@ -115,9 +111,9 @@ class UpdateComment extends Component {
     }
 }
 
-function mapStateToProps({ comment }) {
+function mapStateToProps(post) {
     return {
-        comment,
+        post
     }
 }
 

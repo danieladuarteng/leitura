@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
 import { addPost } from '../actions/shared'
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import {
     postDetails, postComments,
     AddComment,
@@ -92,7 +92,7 @@ class CommentsList extends Component {
 
     render() {
         const { classes, commentCount } = this.props
-        const { body, author } = this.state.comment
+        const { body, author} = this.state.comment
         console.log(this.props)
         return (
             <div className="comments">
@@ -155,15 +155,7 @@ class CommentsList extends Component {
                             {comment.body}
                         </div>
 
-                        <Button
-                            variant="contained"
-                            color="secondary"
-                            type="submit"
-                            className="edit-comment"
-                            onClick={() => this.handleEdit(comment.id)}
-                        >
-                            EDIT
-                        </Button>
+                        <Link to={`/edit-comment/${comment.id}`}><div id="edit-post">EDIT</div></Link>
                         <Button
                             variant="contained"
                             color="primary"

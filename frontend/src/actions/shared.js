@@ -10,7 +10,8 @@ import {
     createComment,
     voteScorePost,
     editComment,
-    deleteComment
+    deleteComment,
+    getCommentsDetails,
 } from '../LeituraAPI'
 
 import {
@@ -25,7 +26,8 @@ import {
     newComment,
     toggleVoteScore,
     editCommentAction,
-    deleteCommentAction
+    deleteCommentAction,
+    receiveCommentDetails,
 } from './posts'
 
 
@@ -62,6 +64,18 @@ export function postDetails(id) {
             .then(post => {
                 dispatch(receivePostDetails(post))
                 return post;
+            })
+    }
+}
+
+export function commentDetails(id) {
+    console.log(id)
+    return (dispatch) => {
+        
+        return getCommentsDetails(id)
+        
+            .then(comment => {
+                dispatch(receiveCommentDetails(comment))
             })
     }
 }
@@ -123,17 +137,17 @@ export function handleEditPost(id, edited) {
     }
 }
 
-export function handleEditComment(id, edited){
-    return dispatch =>{
+export function handleEditComment(id, edited) {
+    return dispatch => {
         return editComment(id, edited)
-        .then(resp => dispatch(editCommentAction(resp)))
+            .then(resp => dispatch(editCommentAction(resp)))
             .catch(e => {
                 console.warn('Error in editComment: ', e)
             })
     }
 }
 
-export function handleDeletePost(id) {
+export function handleDeletePost(id, ) {
     return dispatch => {
         return deletePost(id)
             .then(resp => {
@@ -145,16 +159,16 @@ export function handleDeletePost(id) {
     }
 }
 
-export function handleDeleteComment(id){
-    return dispatch =>{
+export function handleDeleteComment(id) {
+    return dispatch => {
         return deleteComment(id)
-        .then(resp => {
-            dispatch(deleteCommentAction(resp))
-        })
-        .catch(e => {
-            console.warn('Error in deleteComment: ', e)
-        })
-}
+            .then(resp => {
+                dispatch(deleteCommentAction(resp))
+            })
+            .catch(e => {
+                console.warn('Error in deleteComment: ', e)
+            })
+    }
 }
 
 export function voteScorePostAction(id, vote) {
