@@ -12,11 +12,15 @@ class PostsList extends Component {
     }
 
     handleLike = (id, vote) => {
-
         const { dispatch } = this.props
-
         dispatch(voteScorePostAction(id, vote))
     }
+
+    handlePostDetails = (history, post) =>
+        history.push({
+            pathname: `/${post.category}/${post.id}`,
+            state: { id: post.id }
+        })
 
     render() {
         const {
@@ -28,14 +32,21 @@ class PostsList extends Component {
             commentCount,
             body,
             voteScore,
-        } = this.props.post;
+        } = this.props.post
 
-        const {upvote, downvote} = this.state
+        const { post, history } = this.props
+
+
+        const { location } = this.props.history
+
+        console.log(this.props.history)
+
+        const { upvote, downvote } = this.state
         return (
             <div className="post1">
 
-                <Link to={`/${category}/${id}`}><h1>{title}</h1></Link>
-                
+                <h1>{title}</h1>
+
                 <div className="cabecalho">
                     <div className="box-1">{category}</div>
                     <div className="box-2">{author}</div>
@@ -48,14 +59,19 @@ class PostsList extends Component {
                     <p>{body}</p>
                 </div>
 
-                <Link to={`/${category}/${id}`}>
-                    <div className="botaoEnviar">CONTINUE LENDO</div>
-                </Link>
+
+                <div
+                    className="botaoEnviar"
+                    onClick={() => this.handlePostDetails(history, post)}
+                >
+                    CONTINUE LENDO
+                </div>
+
 
                 <div className="icons-post">
-                    <div className="like-post" onClick={()=> this.handleLike(id, upvote)}></div>
+                    <div className="like-post" onClick={() => this.handleLike(id, upvote)}></div>
                     <div className="like-post-text">{voteScore}</div>
-                    <div className="deslike-post" onClick={()=> this.handleLike(id, downvote)}></div>
+                    <div className="deslike-post" onClick={() => this.handleLike(id, downvote)}></div>
                 </div>
             </div>
         )

@@ -70,8 +70,8 @@ class NewPost extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { dispatch } = this.props
-        dispatch(addPost(this.state.post))
+        const { dispatch, history } = this.props
+        dispatch(addPost(this.state.post)).then(history.push('/'));
 
         this.setState({ toHome: true })
     }

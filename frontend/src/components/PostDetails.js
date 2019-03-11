@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
 import moment from 'moment';
-import { 
-    postDetails, 
-    postComments, 
-    handleDeletePost, 
+import {
+    postDetails,
+    postComments,
+    handleDeletePost,
     voteScorePostAction,
 } from '../actions/shared'
 import CommentsList from './CommentsList'
@@ -17,16 +17,19 @@ class PostDetails extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(postDetails(this.props.match.params.id))
-        this.props.dispatch(postComments(this.props.match.params.id))
+        const { dispatch, location } = this.props
+        dispatch(postDetails(this.props.match.params.id))
+        dispatch(postComments(this.props.match.params.id))
+        console.log(location)
     }
 
     handleDelete = () => {
-        const { dispatch } = this.props
+        const { dispatch, history } = this.props
         dispatch(handleDeletePost(this.props.match.params.id))
         this.setState({
             toHome: true
         })
+        history.push('/');
     }
 
     handleLike = (id, vote) => {
@@ -34,9 +37,16 @@ class PostDetails extends Component {
         dispatch(voteScorePostAction(id, vote))
     }
 
+    handleEdit = (history, post) =>
+        history.push({
+            pathname: `/edit-post/${post.id}`,
+            state: { post }
+        })
+
     render() {
         const { id, title, category, author, timestamp, voteScore, body, commentCount } = this.props.post
         const { toHome } = this.state
+        const { post, history } = this.props
 
         if (toHome === true) {
             return <Redirect to='/' />
@@ -55,9 +65,9 @@ class PostDetails extends Component {
                             <div className="box-2">{author}</div>
                             <div className="box-3">{moment(timestamp).format('DD/MM/YYYY')}</div>
                             <div className="icons">
-                                <div className="like-button" onClick={()=> this.handleLike(id, 'upVote')}></div>
+                                <div className="like-button" onClick={() => this.handleLike(id, 'upVote')}></div>
                                 <div className="like-button-text">{voteScore}</div>
-                                <div className="deslike-button" onClick={()=> this.handleLike(id, 'downVote')}></div>
+                                <div className="deslike-button" onClick={() => this.handleLike(id, 'downVote')}></div>
                             </div>
                         </div>
                         <p>
@@ -69,7 +79,12 @@ class PostDetails extends Component {
                         />
                     </div>
                     <div className="item-sidebar">
-                        <Link to={`/edit-post/${id}`}><div id="edit-post">EDIT</div></Link>
+                        <div
+                            id="edit-post"
+                            onClick={() => this.handleEdit(history, post)}
+                        >
+                            EDIT
+                            </div>
                         <Button
                             variant="contained"
                             color="secondary"

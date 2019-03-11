@@ -42,7 +42,7 @@ class Home extends Component {
   }
 
   render() {
-    const { renderForVoteScore, renderForTimestamp, categories } = this.props;
+    const { renderForVoteScore, renderForTimestamp, categories, history } = this.props;
     const { categorySelected, sort } = this.state;
 
     console.log(this.props)
@@ -60,6 +60,7 @@ class Home extends Component {
                 <PostsList
                   id={id}
                   key={id}
+                  history={history}
                 />
               ))
               :
@@ -67,6 +68,7 @@ class Home extends Component {
                 <PostsList
                   id={id}
                   key={id}
+                  history={history}
                 />
               ))
             }

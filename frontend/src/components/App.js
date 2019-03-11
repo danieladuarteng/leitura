@@ -23,10 +23,12 @@ class App extends Component {
 
           <Route path="/edit-comment/:id" component={UpdateComment}/>
           
-          <Route path="/:category/:id" render={props => {
-              console.log(props)
-              return <PostDetails {...props} />
-          }} />
+          <Route path="/:category/:id"  render={props => {
+            const {location } = props;
+            if(location.state === undefined) return <Page404 />
+            return <PostDetails {...props} />
+          }} /> />
+        
 
           <Route path="/newpost" component={NewPost} />
 
