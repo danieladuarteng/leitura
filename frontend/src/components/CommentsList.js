@@ -13,6 +13,7 @@ import {
     AddComment,
     handleInitialData,
     handleDeleteComment,
+    voteScoreCommentAction,
 } from '../actions/shared'
 
 const styles = theme => ({
@@ -81,18 +82,23 @@ class CommentsList extends Component {
         })
     }
 
-    handleEdit = (id) =>{
-        console.log(id,'comment')
+    handleEdit = (id) => {
+        console.log(id, 'comment')
     }
 
-    handleDelete = (id) =>{
-        const {dispatch} = this.props
+    handleDelete = (id) => {
+        const { dispatch } = this.props
         dispatch(handleDeleteComment(id))
+    }
+
+    handleLike = (id, vote) => {
+        const { dispatch } = this.props
+        dispatch(voteScoreCommentAction(id, vote))
     }
 
     render() {
         const { classes, commentCount } = this.props
-        const { body, author} = this.state.comment
+        const { body, author } = this.state.comment
         console.log(this.props)
         return (
             <div className="comments">
@@ -166,9 +172,9 @@ class CommentsList extends Component {
                             REMOVE
                         </Button>
                         <div className="controls">
-                            <div className="like-comment"></div>
+                            <div className="like-comment" onClick={() => this.handleLike(comment.id, 'upVote')}></div>
                             <div className="like-comment-text">{comment.voteScore}</div>
-                            <div className="deslike-comment"></div>
+                            <div className="deslike-comment" onClick={() => this.handleLike(comment.id, 'downVote')}></div>
                         </div>
                     </div>
                 ))}
@@ -177,7 +183,7 @@ class CommentsList extends Component {
     }
 }
 
-function mapStateToProps({ post,comment }, { id, commentCount }) {
+function mapStateToProps({ post, comment }, { id, commentCount }) {
     return {
         post,
         commentCount,

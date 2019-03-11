@@ -12,6 +12,7 @@ import {
     editComment,
     deleteComment,
     getCommentsDetails,
+    voteScoreComment,
 } from '../LeituraAPI'
 
 import {
@@ -28,6 +29,7 @@ import {
     editCommentAction,
     deleteCommentAction,
     receiveCommentDetails,
+    toggleVoteScoreComment,
 } from './posts'
 
 
@@ -175,6 +177,20 @@ export function voteScorePostAction(id, vote) {
         return voteScorePost(id, vote)
             .then(resp => {
                 dispatch(toggleVoteScore(resp))
+                console.log(resp)
+            })
+            .catch((e) => {
+                console.warn('Error in voteScorePost: ', e)
+                alert('The was an error liking or deslinking the post. Try again')
+            })
+    }
+}
+
+export function voteScoreCommentAction(id, vote) {
+    return (dispatch) => {
+        return voteScoreComment(id, vote)
+            .then(resp => {
+                dispatch(toggleVoteScoreComment(resp))
                 console.log(resp)
             })
             .catch((e) => {

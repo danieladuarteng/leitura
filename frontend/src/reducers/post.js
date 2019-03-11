@@ -7,6 +7,7 @@ import {
     EDIT_COMMENT,
     DELETE_COMMENT,
     COMMENT_DETAILS,
+    TOGGLE_VOTE_SCORE_COMMENT,
 } from "../actions/posts";
 
 export default function post(state = {}, action) {
@@ -39,7 +40,15 @@ export default function post(state = {}, action) {
                 ...state,
                 voteScore: action.post.voteScore,
             }
-
+        case TOGGLE_VOTE_SCORE_COMMENT:
+            const { comment } = action;
+            const updatedComments = state.comments.map(item => (
+                item.id === comment.id ? comment : item
+            ));
+            return {
+                ...state,
+                comments: updatedComments,
+            }
         case NEW_COMMENT:
             return {
                 ...state,

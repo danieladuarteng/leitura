@@ -139,6 +139,20 @@ export const voteScorePost = (id, vote) =>
             return data
         })
 
+export const voteScoreComment= (id, vote) =>
+    fetch(`${api}/comments/${id}`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+            option: vote,
+        })
+    }).then(res => res.json())
+        .then(data => {
+            console.log("novo voto", vote)
+            console.log(data)
+            return data
+        })
+
 export const createComment = (parentId, content) =>
     fetch(`${api}/comments`, {
         method: 'POST',

@@ -10,6 +10,7 @@ export const NEW_COMMENT = 'NEW_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const COMMENT_DETAILS = 'COMMENT_DETAILS'
+export const TOGGLE_VOTE_SCORE_COMMENT = 'TOGGLE_VOTE_SCORE_COMMENT'
 
 export const GET_CATEGORIES = 'GET_CATEGORIES'
 export const GET_POSTS_FOR_CATEGORY = 'GET_POSTS_FOR_CATEGORY'
@@ -68,6 +69,13 @@ export function toggleVoteScore(post) {
     return {
         type: TOGGLE_VOTE_SCORE,
         post,
+    }
+}
+
+export function toggleVoteScoreComment(comment){
+    return{
+        type: TOGGLE_VOTE_SCORE_COMMENT,
+        comment,
     }
 }
 
