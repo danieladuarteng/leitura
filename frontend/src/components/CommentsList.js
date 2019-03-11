@@ -177,11 +177,12 @@ class CommentsList extends Component {
     }
 }
 
-function mapStateToProps({ post }, { id, commentCount }) {
+function mapStateToProps({ post,comment }, { id, commentCount }) {
     return {
         post,
         commentCount,
-        id
+        id,
+        comment
     }
 }
 

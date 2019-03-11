@@ -47,13 +47,7 @@ export default function post(state = {}, action) {
                 comments: state.comments.concat(action.comment)
             }
         case EDIT_COMMENT:
-            const commentsList = state.comments.map(item => (
-                item.id === action.comment.id ? action.comment : item
-            ));
-            return {
-                ...state,
-                comments: commentsList,
-            }
+            return action.comment
         case DELETE_COMMENT:
             const { comments } = state;
             let newComments = comments;
@@ -61,7 +55,6 @@ export default function post(state = {}, action) {
             newComments.splice(
                 comments.findIndex(item => item.id === action.comment.id), 1
             );
-
             return {
                 ...state,
                 commentCount: state.commentCount - 1,

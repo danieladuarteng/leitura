@@ -7,7 +7,10 @@ const headers = {
 }
 
 export const getAllPosts = () =>
-    fetch(`${api}/posts`, { headers })
+    fetch(`${api}/posts`, {
+        method: 'GET',
+        headers
+    })
         .then(res => res.json())
         .then(data => {
             //console.log('todos os posts')
@@ -21,7 +24,7 @@ export const getAllPosts = () =>
 
 export const getAllCategories = () =>
     fetch(`${api}/categories`, {
-        method: 'get',
+        method: 'GET',
         headers
     })
         .then(res => res.json())
@@ -38,7 +41,7 @@ export const getAllCategories = () =>
 
 export const getPostsForCategories = (name) =>
     fetch(`${api}/${name}/posts`, {
-        method: 'get',
+        method: 'GET',
         headers
     })
         .then(res => res.json())
@@ -54,7 +57,7 @@ export const getPostsForCategories = (name) =>
 
 export const getPostDetails = (postId) =>
     fetch(`${api}/posts/${postId}`, {
-        method: 'get',
+        method: 'GET',
         headers
     })
         .then(res => res.json())
@@ -70,7 +73,7 @@ export const getPostDetails = (postId) =>
 
 export const getCommentsDetails = (commentId) =>
     fetch(`${api}/comments/${commentId}`, {
-        method: 'get',
+        method: 'GET',
         headers
     })
         .then(res => res.json())
@@ -86,7 +89,7 @@ export const getCommentsDetails = (commentId) =>
 
 export const getPostComments = (postId) =>
     fetch(`${api}/posts/${postId}/comments`, {
-        method: 'get',
+        method: 'GET',
         headers
     })
         .then(res => res.json())
@@ -122,7 +125,6 @@ export const createPost = (post) =>
             return data
         })
 
-
 export const voteScorePost = (id, vote) =>
     fetch(`${api}/posts/${id}`, {
         method: 'POST',
@@ -136,9 +138,6 @@ export const voteScorePost = (id, vote) =>
             console.log(data)
             return data
         })
-
-
-
 
 export const createComment = (parentId, content) =>
     fetch(`${api}/comments`, {
@@ -179,7 +178,7 @@ export const editComment = (id, bodyComment) =>
         method: 'PUT',
         headers,
         body: JSON.stringify({
-            body: bodyComment.body,
+            body: bodyComment,
         })
     }).then(res => res.json())
         .then(data => {
@@ -187,7 +186,6 @@ export const editComment = (id, bodyComment) =>
             console.log(data)
             return data
         })
-
 
 export const deletePost = id =>
     fetch(`${api}/posts/${id}`, {

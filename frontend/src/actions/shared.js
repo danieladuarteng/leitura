@@ -69,13 +69,11 @@ export function postDetails(id) {
 }
 
 export function commentDetails(id) {
-    console.log(id)
     return (dispatch) => {
-        
         return getCommentsDetails(id)
-        
-            .then(comment => {
-                dispatch(receiveCommentDetails(comment))
+            .then(resp => {
+                dispatch(receiveCommentDetails(resp))
+                return resp
             })
     }
 }
@@ -138,6 +136,7 @@ export function handleEditPost(id, edited) {
 }
 
 export function handleEditComment(id, edited) {
+    console.log(edited)
     return dispatch => {
         return editComment(id, edited)
             .then(resp => dispatch(editCommentAction(resp)))

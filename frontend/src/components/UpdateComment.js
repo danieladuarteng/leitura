@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
-import { commentDetails, handleEditComment } from '../actions/shared'
+import { commentDetails, handleEditComment, postDetails } from '../actions/shared'
 import { Redirect } from 'react-router-dom';
 
 const styles = theme => ({
@@ -27,44 +27,52 @@ const styles = theme => ({
 class UpdateComment extends Component {
 
     state = {
-        commentEdited: {
-            body: '',
-        },
-        toHome: false,
+        body: '',
+        backDetails: false,
+        category: '',
     };
 
     componentDidMount() {
-        const commentId = this.props.dispatch(commentDetails(this.props.post.id))
-        console.log(commentId)
-     
+        const { dispatch } = this.props
+        console.log(this.props)
+        dispatch(commentDetails(this.props.match.params.id))
+            .then(mydata => {
+                this.setState({
+                    body: mydata.body,
+                })
+            });
     }
 
     handleChange = name => event => {
         this.setState({
-            commentEdited: {
-                ...this.state.commentEdited,
-                [name]: event.target.value,
-            }
+            ...this.state.body,
+            [name]: event.target.value,
         })
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         const { dispatch } = this.props
-        dispatch(handleEditComment(this.props.match.params.id, this.state.commentEdited))
-
-        this.setState({ toHome: true })
+        dispatch(handleEditComment(this.props.match.params.id, this.state.body))
+        dispatch(postDetails(this.props.post.parentId)).then(mydata => {
+            this.setState({
+                category: mydata.category,
+                backDetails: true
+            })
+        });
     }
+
     render() {
         const { classes } = this.props;
-        const { title, body } = this.state.commentEdited
-        const { toHome } = this.state
 
+        const { backDetails, body, category } = this.state
         console.log(this.props)
+        console.log(category)
+        const id = this.props.post.parentId
 
-        // if (toHome === true) {
-        //     return <Redirect to='/:category/:id' />
-        // }
+        if (backDetails === true) {
+            return <Redirect to={`/${category}/${id}`} />
+        }
 
         return (
             <div>
@@ -111,9 +119,13 @@ class UpdateComment extends Component {
     }
 }
 
-function mapStateToProps(post) {
+function mapStateToProps({ post, comment, category }, { id, commentCount }) {
     return {
-        post
+        post,
+        commentCount,
+        id,
+        comment,
+        category
     }
 }
 
