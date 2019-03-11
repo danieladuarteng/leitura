@@ -17,11 +17,14 @@ class PostDetails extends Component {
     }
 
     componentDidMount() {
-        const { dispatch, location } = this.props
-        dispatch(postDetails(this.props.match.params.id))
+        const { dispatch, history } = this.props
+        dispatch(postDetails(this.props.match.params.id)).then(mydata => {
+        history.push({
+            pathname: `/${mydata.category}/${mydata.id}`,
+            state: { id: mydata.id }
+        })
         dispatch(postComments(this.props.match.params.id))
-        console.log(location)
-    }
+    })}
 
     handleDelete = () => {
         const { dispatch, history } = this.props
@@ -47,7 +50,7 @@ class PostDetails extends Component {
         const { id, title, category, author, timestamp, voteScore, body, commentCount } = this.props.post
         const { toHome } = this.state
         const { post, history } = this.props
-
+        console.log('post details', history.location.state)
         if (toHome === true) {
             return <Redirect to='/' />
         }
