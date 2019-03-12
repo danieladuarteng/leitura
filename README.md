@@ -14,7 +14,15 @@ Open the [GitBash](https://git-scm.com/) and input the commands:
 
 ## Run:
 
-To run the project enter:
+To run the project
+
+Access the folder: *api-server*
+and input in GitBash: 
+
+`node server`
+
+And access the folder: *frontend*
+and input in GitBash: 
 
 `npm start`
 
