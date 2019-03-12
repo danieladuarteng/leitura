@@ -4,7 +4,8 @@ import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import { postDetails, handleEditPost } from '../actions/shared'
-import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom'
+import Header from './Header'
 
 const styles = theme => ({
     container: {
@@ -72,10 +73,7 @@ class UpdatePost extends Component {
 
         return (
             <div>
-                <div className="home">
-                    <h1><strong>Leitura</strong></h1>
-                </div>
-
+                <Header />
                 <div className="container-view">
                     <div className="item-main">
                         <div className="formulario">

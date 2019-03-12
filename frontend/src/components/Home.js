@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import PostsList from './PostsList';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import Button from '@material-ui/core/Button'
+import PostsList from './PostsList'
+import Header from './Header'
 import { connect } from 'react-redux'
 import {
   handleInitialData,
@@ -47,10 +48,7 @@ class Home extends Component {
 
     return (
       <div>
-        <div className="home">
-          <h1><strong>Leitura</strong></h1>
-        </div>
-
+        <Header />
         <div className="grid-posts">
           <div className="grid-posts-item1">
             {sort === 'voteScore' ?

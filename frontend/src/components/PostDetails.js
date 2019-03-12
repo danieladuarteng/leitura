@@ -11,6 +11,7 @@ import {
 import CommentsList from './CommentsList'
 import Button from '@material-ui/core/Button'
 import Page404 from './Page404';
+import Header from './Header'
 
 class PostDetails extends Component {
     state = {
@@ -61,10 +62,7 @@ class PostDetails extends Component {
                     </div>
                     :
                     <div>
-                        <div className="home">
-                            <h1><strong>Leitura</strong></h1>
-                        </div>
-
+                        <Header />
                         <div className="container-view">
                             <div className="item-main">
                                 <h1>{title}</h1>
