@@ -10,6 +10,18 @@ Open the [GitBash](https://git-scm.com/) and input the commands:
 
 `git clone https://github.com/danieladuarteng/leitura.git`
 
+### Back End
+
+Access the folder: *api-server*
+and input in GitBash: 
+
+`npm install`
+
+### Front end 
+
+And access the folder: *frontend*
+and input in GitBash: 
+
 `npm install`
 
 ## Run:
