@@ -10,21 +10,26 @@ import {
 } from '../actions/shared'
 import CommentsList from './CommentsList'
 import Button from '@material-ui/core/Button'
+import Page404 from './Page404';
 
 class PostDetails extends Component {
     state = {
         toHome: false,
+        havePost: ''
     }
 
-    componentDidMount() {
+    componentDidMount = async () => {
         const { dispatch, history } = this.props
-        dispatch(postDetails(this.props.match.params.id)).then(mydata => {
-        history.push({
-            pathname: `/${mydata.category}/${mydata.id}`,
-            state: { id: mydata.id }
+        const returnDetails = await dispatch(postDetails(this.props.match.params.id))
+        this.setState({
+            havePost: returnDetails.id
         })
+        // console.log(returnDetails.id)
+        // if(returnDetails.id === undefined){
+        //     console.log('post excluido')
+        // }
         dispatch(postComments(this.props.match.params.id))
-    })}
+    }
 
     handleDelete = () => {
         const { dispatch, history } = this.props
@@ -32,7 +37,6 @@ class PostDetails extends Component {
         this.setState({
             toHome: true
         })
-        history.push('/');
     }
 
     handleLike = (id, vote) => {
@@ -43,62 +47,69 @@ class PostDetails extends Component {
     handleEdit = (history, post) =>
         history.push({
             pathname: `/edit-post/${post.id}`,
-            state: { post }
         })
 
     render() {
         const { id, title, category, author, timestamp, voteScore, body, commentCount } = this.props.post
-        const { toHome } = this.state
+        const { toHome, havePost } = this.state
         const { post, history } = this.props
-        console.log('post details', history.location.state)
+        console.log('post details', this.state.havePost)
         if (toHome === true) {
             return <Redirect to='/' />
         }
         return (
             <div>
-                <div className="home">
-                    <h1><strong>Leitura</strong></h1>
-                </div>
-
-                <div className="container-view">
-                    <div className="item-main">
-                        <h1>{title}</h1>
-                        <div className="cabecalho">
-                            <div className="box-1">{category}</div>
-                            <div className="box-2">{author}</div>
-                            <div className="box-3">{moment(timestamp).format('DD/MM/YYYY')}</div>
-                            <div className="icons">
-                                <div className="like-button" onClick={() => this.handleLike(id, 'upVote')}></div>
-                                <div className="like-button-text">{voteScore}</div>
-                                <div className="deslike-button" onClick={() => this.handleLike(id, 'downVote')}></div>
-                            </div>
-                        </div>
-                        <p>
-                            {body}
-                        </p>
-                        <CommentsList
-                            id={id}
-                            commentCount={commentCount}
-                        />
+                {havePost === undefined ?
+                    <div>
+                        <Page404 />
                     </div>
-                    <div className="item-sidebar">
-                        <div
-                            id="edit-post"
-                            onClick={() => this.handleEdit(history, post)}
-                        >
-                            EDIT
+                    :
+                    <div>
+                        <div className="home">
+                            <h1><strong>Leitura</strong></h1>
+                        </div>
+
+                        <div className="container-view">
+                            <div className="item-main">
+                                <h1>{title}</h1>
+                                <div className="cabecalho">
+                                    <div className="box-1">{category}</div>
+                                    <div className="box-2">{author}</div>
+                                    <div className="box-3">{moment(timestamp).format('DD/MM/YYYY')}</div>
+                                    <div className="icons">
+                                        <div className="like-button" onClick={() => this.handleLike(id, 'upVote')}></div>
+                                        <div className="like-button-text">{voteScore}</div>
+                                        <div className="deslike-button" onClick={() => this.handleLike(id, 'downVote')}></div>
+                                    </div>
+                                </div>
+                                <p>
+                                    {body}
+                                </p>
+                                <CommentsList
+                                    id={id}
+                                    commentCount={commentCount}
+                                />
                             </div>
-                        <Button
-                            variant="contained"
-                            color="secondary"
-                            type="submit"
-                            onClick={() => this.handleDelete()}
-                        >
-                            REMOVE
+                            <div className="item-sidebar">
+                                <div
+                                    id="edit-post"
+                                    onClick={() => this.handleEdit(history, post)}
+                                >
+                                    EDIT
+                            </div>
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    type="submit"
+                                    onClick={() => this.handleDelete()}
+                                >
+                                    REMOVE
                         </Button>
 
+                            </div>
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         );
     }
