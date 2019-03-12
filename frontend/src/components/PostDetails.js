@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
 import moment from 'moment';
 import {
@@ -19,20 +19,16 @@ class PostDetails extends Component {
     }
 
     componentDidMount = async () => {
-        const { dispatch, history } = this.props
+        const { dispatch } = this.props
         const returnDetails = await dispatch(postDetails(this.props.match.params.id))
         this.setState({
             havePost: returnDetails.id
         })
-        // console.log(returnDetails.id)
-        // if(returnDetails.id === undefined){
-        //     console.log('post excluido')
-        // }
         dispatch(postComments(this.props.match.params.id))
     }
 
     handleDelete = () => {
-        const { dispatch, history } = this.props
+        const { dispatch } = this.props
         dispatch(handleDeletePost(this.props.match.params.id))
         this.setState({
             toHome: true
@@ -53,7 +49,7 @@ class PostDetails extends Component {
         const { id, title, category, author, timestamp, voteScore, body, commentCount } = this.props.post
         const { toHome, havePost } = this.state
         const { post, history } = this.props
-        console.log('post details', this.state.havePost)
+
         if (toHome === true) {
             return <Redirect to='/' />
         }
@@ -96,7 +92,7 @@ class PostDetails extends Component {
                                     onClick={() => this.handleEdit(history, post)}
                                 >
                                     EDIT
-                            </div>
+                                </div>
                                 <Button
                                     variant="contained"
                                     color="secondary"
@@ -104,8 +100,7 @@ class PostDetails extends Component {
                                     onClick={() => this.handleDelete()}
                                 >
                                     REMOVE
-                        </Button>
-
+                                </Button>
                             </div>
                         </div>
                     </div>

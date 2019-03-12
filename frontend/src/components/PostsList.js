@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
 import { voteScorePostAction } from '../actions/shared'
 import { connect } from 'react-redux'
 import moment from 'moment';
@@ -18,8 +17,7 @@ class PostsList extends Component {
 
     handlePostDetails = (history, post) =>
         history.push({
-            pathname: `/${post.category}/${post.id}`,
-            state: { id: post.id }
+            pathname: `/${post.category}/${post.id}`
         })
 
     render() {
@@ -35,13 +33,8 @@ class PostsList extends Component {
         } = this.props.post
 
         const { post, history } = this.props
-
-
-        const { location } = this.props.history
-
-        console.log(this.props.history)
-
         const { upvote, downvote } = this.state
+
         return (
             <div className="post1">
 
@@ -67,7 +60,6 @@ class PostsList extends Component {
                     CONTINUE LENDO
                 </div>
 
-
                 <div className="icons-post">
                     <div className="like-post" onClick={() => this.handleLike(id, upvote)}></div>
                     <div className="like-post-text">{voteScore}</div>
@@ -77,6 +69,7 @@ class PostsList extends Component {
         )
     }
 }
+
 function mapStateToProps({ posts }, { id }) {
     const post = posts[id]
     return {

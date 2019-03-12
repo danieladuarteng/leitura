@@ -3,15 +3,12 @@ import { connect } from 'react-redux'
 import { get } from 'lodash'
 import moment from 'moment';
 import TextField from '@material-ui/core/TextField'
-import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
-import { addPost } from '../actions/shared'
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
-    postDetails, postComments,
+    postComments,
     AddComment,
-    handleInitialData,
     handleDeleteComment,
     voteScoreCommentAction,
 } from '../actions/shared'
@@ -47,11 +44,6 @@ class CommentsList extends Component {
         };
     }
 
-    componentDidMount() {
-        //this.props.dispatch(postDetails(this.props.id))
-        //this.props.dispatch(postComments(this.props.id))
-    }
-
     handleComments = () => {
         const { post } = this.props
         const commentsList = get(post, 'comments', []);
@@ -82,9 +74,6 @@ class CommentsList extends Component {
         })
     }
 
-    handleEdit = (id) => {
-        console.log(id, 'comment')
-    }
 
     handleDelete = (id) => {
         const { dispatch } = this.props

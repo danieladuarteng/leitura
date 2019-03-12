@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import * as LeituraAPI from '../LeituraAPI'
 import Button from '@material-ui/core/Button';
 import PostsList from './PostsList';
-import _ from 'underscore';
-import moment from 'moment'
 import { connect } from 'react-redux'
-import { handleInitialData, handleGetAllCategories, handlePostsForCategory } from '../actions/shared'
+import {
+  handleInitialData,
+  handleGetAllCategories,
+  handlePostsForCategory
+} from '../actions/shared'
 
 class Home extends Component {
   state = {
@@ -32,7 +33,6 @@ class Home extends Component {
         .then(history.push(""))
     }
     this.setState({ categorySelected })
-    
   }
 
   onSortBy = (e) => {
@@ -43,9 +43,7 @@ class Home extends Component {
 
   render() {
     const { renderForVoteScore, renderForTimestamp, categories, history } = this.props;
-    const { categorySelected, sort } = this.state;
-
-    console.log(this.props)
+    const { sort } = this.state;
 
     return (
       <div>

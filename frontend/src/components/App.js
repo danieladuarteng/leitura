@@ -5,15 +5,12 @@ import { Route, HashRouter as Router, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PostDetails from './PostDetails'
 import NewPost from './NewPost'
-import Page404 from './Page404'
-import { handleInitialData } from '../actions/shared'
+import UpdateComment from './UpdateComment';
 
 import './App.css';
-import UpdateComment from './UpdateComment';
 
 class App extends Component {
   render() {
-    console.log(this.props)
     return (
       <Router>
         <Switch>
@@ -24,7 +21,6 @@ class App extends Component {
           <Route path="/edit-comment/:id" component={UpdateComment} />
 
           <Route path="/:category/:id" component={PostDetails}/>
-
 
           <Route path="/newpost" component={NewPost} />
 
