@@ -1,5 +1,7 @@
 # Leitura
 
+[Access the website](https://danieladuarteng.github.io/leitura/)
+
 This is the second project of the Nanodegree React Developer course, from Udacity Brasil
 
 The goal is to create kind of blog than create / edit / delete post and comments and vote 
