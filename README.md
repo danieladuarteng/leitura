@@ -1,6 +1,6 @@
 # Leitura
 
-[Access the website](https://danieladuarteng.github.io/leitura/)
+![](leitura.gif)
 
 This is the second project of the Nanodegree React Developer course, from Udacity Brasil
 
